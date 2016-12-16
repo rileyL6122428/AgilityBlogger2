@@ -1,0 +1,34 @@
+div.sign-in-container h2 {
+  margin-top: 40px;
+  font-size: 28px;
+}
+
+form.sign-in-form label {
+  float: left;
+  padding-top: 3px;
+  font-size: 26px;
+}
+
+form.sign-in-form > div.form-group:first-child, form.sign-in-form > div.form-group:last-child {
+  margin-top: 20px;
+}
+
+form.sign-in-form div.input-container {
+  position: relative;
+}
+
+form.sign-in-form div.input-container > label {
+  position: absolute;
+  left: -20px;
+  top: 3px;
+}
+
+div.input-container > .form-control:focus {
+  border-color: rgba(82, 177, 147, .9);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82, 177, 147, .9);
+}
+
+div.input-container > .form-control:focus + label {
+  color: rgba(82, 177, 147 ,.9);
+  text-shadow: 0 0 2px rgba(82, 177, 147 ,.9);
+}
