@@ -1,7 +1,7 @@
 ##AT WORK
-0. Angular labs up to 6 or seven
-1. angular grails blog
-2. study C
+0. hook up sign up and go to dashboard page
+1. study C
+2. complete status report
 
 ##AFTER WORK
 

@@ -1,5 +1,8 @@
-function SignUpController() {
+function SignUpController(authenticationBackendRequests) {
   'ngInject';
+
+  debugger
+  authenticationBackendRequests.signUp({});
 
   var vm = this;
 
