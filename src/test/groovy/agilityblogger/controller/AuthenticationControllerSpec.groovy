@@ -21,9 +21,9 @@ class AuthControllerSpec extends Specification {
       when:
         controller.createAccount()
       then:
-        def resp = controller.response.json
-        resp.errorMessages.contains("Password field is empty") == true
-        resp.user == null
+        controller.response.status == 409
+        controller.response.json.errorMessages.contains("Password field is empty") == true
+        controller.response.json.user == null
     }
 
     void "#createAccount sends an error message when username field is empty"() {
@@ -33,9 +33,9 @@ class AuthControllerSpec extends Specification {
       when:
         controller.createAccount()
       then:
-        def resp = controller.response.json
-        resp.errorMessages.contains("Username field is empty") == true
-        resp.user == null
+        controller.response.status == 409
+        controller.response.json.errorMessages.contains("Username field is empty") == true
+        controller.response.json.user == null
     }
 
     void "#createAccount sends an error message when the username is already taken"() {
@@ -46,9 +46,9 @@ class AuthControllerSpec extends Specification {
       when:
         controller.createAccount()
       then:
-        def resp = controller.response.json
-        resp.errorMessages.contains("Username is already taken") == true
-        resp.user == null
+        controller.response.status == 409
+        controller.response.json.errorMessages.contains("Username is already taken") == true
+        controller.response.json.user == null
     }
 
     void "#createAccount sends, sets the session for, and persists a user when proper params are submitted"() {
@@ -58,9 +58,9 @@ class AuthControllerSpec extends Specification {
       when:
         controller.createAccount()
       then:
-        def resp = controller.response.json
-        resp.errorMessages == null
-        resp.user.username == "username"
+        controller.response.status == 201
+        controller.response.json.errorMessages == null
+        controller.response.json.user.username == "username"
 
         session.user.username == 'username'
 
@@ -78,9 +78,9 @@ class AuthControllerSpec extends Specification {
       when:
         controller.logIn()
       then:
-        def resp = controller.response.json
-        resp.errorMessages.contains("user cannot be found with given params") == true
-        resp.user == null
+        controller.response.status == 409
+        controller.response.json.errorMessages.contains("user cannot be found with given params") == true
+        controller.response.json.user == null
     }
 
     void "#logIn set the session for, and returns user when proper params are submitted"() {
@@ -92,15 +92,15 @@ class AuthControllerSpec extends Specification {
         controller.logIn()
       then:
         session.user.username == 'username'
+        controller.response.status == 200
 
         def allPersistedUsers = User.list()
         allPersistedUsers.size() == 1
         allPersistedUsers[0].username == "username"
         allPersistedUsers[0].password == "password"
 
-        def resp = controller.response.json
-        resp.errorMessages == null
-        resp.user.username == "username"
+        controller.response.json.errorMessages == null
+        controller.response.json.user.username == "username"
     }
 
     void "#signOut nulls the session and returns a success message"() {
@@ -110,6 +110,7 @@ class AuthControllerSpec extends Specification {
         controller.signOut()
       then:
         session.user == null
+        controller.response.status == 200
         controller.response.json.notification == "Signed out successfully"
     }
 
@@ -120,17 +121,17 @@ class AuthControllerSpec extends Specification {
       when:
         controller.sessionUser()
       then:
-        def resp = controller.response.json
-        resp.user.username == "username"
+        controller.response.status == 200
+        controller.response.json.user.username == "username"
     }
 
     void "#sessionUser returns an error message when a session user is not set"() {
       when:
         controller.sessionUser()
       then:
-        def resp = controller.response.json
-        resp.user == null
-        resp.errorMessages.contains("User not signed in") == true
+        controller.response.status == 401
+        controller.response.json.user == null
+        controller.response.json.errorMessages.contains("User not signed in") == true
     }
 
 }

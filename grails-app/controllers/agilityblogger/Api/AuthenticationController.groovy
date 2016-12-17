@@ -11,9 +11,11 @@ class AuthenticationController {
     def user = new User(params).save(flush: true)
 
     if(user){
+      response.status = 201
       session.user = [username: params.username]
       sendUser(user)
     } else {
+      response.status = 409;
       sendErrorMessages(errorMessagesForCreateAccount())
     }
   }
@@ -41,6 +43,7 @@ class AuthenticationController {
       session["user"] = [username: user.username]
       sendUser(user)
     } else {
+      response.status = 409
       sendErrorMessages(["user cannot be found with given params"])
     }
   }
@@ -56,14 +59,15 @@ class AuthenticationController {
       def user = User.findByUsername(session.user.username)
       sendUser(user)
     } else {
+      response.status = 401
       sendErrorMessages(["User not signed in"])
     }
   }
 
   //NOTE HELPER METHODS BELOW
-  def sendUser(userToSend) {
+  def sendUser(rawUser) {
     render(contentType:"text/json"){
-      user(username: userToSend.username, id: userToSend.id)
+      user(username: rawUser.username, id: rawUser.id)
     }
   }
 
