@@ -1,6 +1,12 @@
-1. begin auth store for sign in page
-2. begin auth api util
-2. make and test callback method for controller
-3. make "hello world" dashboard component
-4. make make a sign happen!
-5. study C
+1. write unit tests for
+  
+  - new classes
+    * errorCheck
+    * formField
+    * matchingFormField
+  - new directive
+   * form-field
+
+
+3. hook up auth with backend and jump to a new page
+2. Update login page to show the backend errors
