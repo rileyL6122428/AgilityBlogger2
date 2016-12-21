@@ -32,6 +32,7 @@ describe("authenticationBackendRequests", () => {
   }));
 
   it("should be wired into the app", () => {
+    debugger
     expect(authenticationBackendRequests).toBeDefined();
   });
 

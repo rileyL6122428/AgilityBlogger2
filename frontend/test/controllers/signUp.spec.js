@@ -18,9 +18,7 @@ describe("SignUpController", () => {
     authenticationBackendRequests = _authenticationBackendRequests_;
   }));
 
-  it('should be registered', () => {
-    expect(vm).toBeDefined();
-  });
+  it('should be registered', () => { expect(vm).toBeDefined(); });
 
   it("should initially set form values to empty strings", () => {
     expect(vm.username.value).toEqual("");

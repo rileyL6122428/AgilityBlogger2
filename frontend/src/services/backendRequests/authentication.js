@@ -3,7 +3,15 @@ function AuthenticationBackendRequests($http, authenticationStore) {
 
   const EMPTY_CB = () => {};
 
-  function signUp(newUser, successCB = EMPTY_CB, failureCB = EMPTY_CB) {
+  function signUp(options) {
+    let defaults = {
+      newUser: {},
+      successCB: EMPTY_CB,
+      failureCB: EMPTY_CB
+    };
+
+    let params = Object.assign(defaults, options);
+
     $http({
       url: "/api/createAccount",
       method: "POST",

@@ -1,9 +1,4 @@
 1. write unit tests for
-  
-  - new classes
-    * errorCheck
-    * formField
-    * matchingFormField
   - new directive
    * form-field
 

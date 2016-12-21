@@ -11,8 +11,9 @@ function KarmaConfig(config) {
       './frontend/test/**/*.spec.js': ['browserify'],
     },
     browsers: ['PhantomJS'],
-    singleRun: true,
-    autoWatch: false,
+    // browsers: ['Chrome'],
+    singleRun: false,
+    // autoWatch: false,
     browserify: {
       debug: true,
       paths: ['./node_modules', './frontend/src'],

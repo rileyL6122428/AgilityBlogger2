@@ -5,36 +5,20 @@
   </div>
 
   <form class="form-horizontal sign-in-form">
-    <div class="form-group">
-      <div class="sign-in-errors" status="{{vm.usernameStatus}}">{{vm.usernameErrors[0]}}</div>
-      <div class="input-container col-xs-7 col-xs-offset-3">
-        <input id="username" placeholder="username" class="form-control" type="text" ng-model="vm.username" ng-change="vm.updateUsernameStatus()">
-        <label for="username" class="glyphicon glyphicon-credit-card"></label>
-      </div>
-    </div>
 
-    <div class="form-group">
-      <div class="sign-in-errors" status="{{vm.passwordStatus}}">{{vm.passwordErrors[0]}}</div>
-      <div class="input-container col-xs-7 col-xs-offset-3">
-        <input id="password" placeholder="password" class="form-control col-xs-3" type="password" ng-model="vm.password" ng-change="vm.updatePasswordStatus()">
-        <label for="password" class="glyphicon glyphicon-lock"></label>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <div class="sign-in-errors" status="{{vm.passwordConfirmStatus}}">{{vm.passwordConfirmErrors[0]}}</div>
-      <div class="input-container col-xs-7 col-xs-offset-3">
-        <input id="passwordConfirm" placeholder="confirm" class="form-control col-xs-3" type="password" ng-model="vm.passwordConfirm" ng-change="vm.updatePasswordConfirmStatus()">
-        <label for="passwordConfirm" class="glyphicon glyphicon-lock"></label>
-      </div>
-    </div>
+    <sign-up-form-field ng-repeat="(fieldName, field) in vm.formFields"
+                        field="field"
+                        update-submittable-status="vm.updateSubmittableStatus"
+                        type="'text'"
+                        icon="'glyphicon glyphicon-credit-card'">
+  </sign-up-form-field>
 
     <div class="form-group">
       <div class="col-xs-1 col-xs-offset-4">
         <button class="btn btn-danger">Cancel</button>
       </div>
       <div class="col-xs-1 col-xs-offset-1">
-        <button class="btn btn-success">Sign Up</button>
+        <button ng-disabled="!vm.credentialsSubmittable" class="btn btn-success">Sign Up</button>
       </div>
     </div>
   </form>

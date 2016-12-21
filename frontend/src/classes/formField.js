@@ -1,9 +1,21 @@
 class FormField {
-  constructor(fieldName, errorChecks = []) {
+
+  constructor(options) {
+    let defaults = {
+      name: "",
+      errorChecks: [],
+      type: "text",
+      icon: ""
+    }
+    
+    let params = Object.assign(defaults, options);
+
     this.value = "";
-    this.name = fieldName
+    this.name = params.name
     this.errors = [];
-    this.errorChecks = errorChecks;
+    this.errorChecks = params.errorChecks;
+    this.type = params.type
+    this.icon = params.icon
   }
 
   updateErrors() {

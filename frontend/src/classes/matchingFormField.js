@@ -1,9 +1,14 @@
 import FormField from './formField'
 
 class MatchingFormField extends FormField {
-  constructor(fieldName, dependantField) {
-    super(fieldName);
-    this.dependantField = dependantField;
+  constructor(options) {
+    super({
+      name: options.name,
+      type: options.dependantField.type,
+      icon: options.dependantField.icon
+    });
+    
+    this.dependantField = options.dependantField;
   }
 
   updateErrors() {

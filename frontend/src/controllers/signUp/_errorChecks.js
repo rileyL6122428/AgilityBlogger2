@@ -19,11 +19,6 @@ let signUpErrorChecks = {
   spacesPresent: new ErrorCheck(
     (value) => { return value.indexOf(" ") != -1; },
     "Illegal chars (spaces are not allowed)"
-  ),
-
-  valueNotMatching: new ErrorCheck(
-    (value, valueToMatch) => { return value !== valueToMatch; },
-    "does not match password"
   )
 }
 

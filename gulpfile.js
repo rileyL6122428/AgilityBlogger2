@@ -60,6 +60,17 @@ gulp.task('test', function(done) {
     configFile: path.join(__dirname, 'karma.conf.js'),
     singleRun: true,
     autoWatch: false,
+    browsers: ['PhantomJS'],
+    reporters: ['dots'],
+  }, done).start();
+});
+
+gulp.task('debug-test', function(done) {
+  new Karma({
+    configFile: path.join(__dirname, 'karma.conf.js'),
+    singleRun: false,
+    browsers: ['Chrome'],
+    autoWatch: false,
     reporters: ['dots'],
   }, done).start();
 });

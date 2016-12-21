@@ -5,58 +5,62 @@ import signUpErrorChecks from './_errorChecks.js';
 function SignUpController(authenticationBackendRequests, $state) {
   'ngInject';
 
-  var vm = this;
+  let vm = this;
+  let username, password, passwordConfirm;
 
-  vm.username = new FormField (
-    "username", [
-    signUpErrorChecks.tooShort,
-    signUpErrorChecks.tooLong,
-    signUpErrorChecks.dashesPresent,
-    signUpErrorChecks.spacesPresent
-  ]);
+  username = new FormField ({
+    name: "username",
+    errorChecks: [
+      signUpErrorChecks.tooShort,
+      signUpErrorChecks.tooLong,
+      signUpErrorChecks.dashesPresent,
+      signUpErrorChecks.spacesPresent
+    ],
+    type: "text",
+    icon: "glyphicon glyphicon-credit-card"
+  })
 
-  vm.password = new FormField (
-    "password",
-    [signUpErrorChecks.tooShort, signUpErrorChecks.tooLong]
-  );
+  password = new FormField ({
+    name: "password",
+    errorChecks: [signUpErrorChecks.tooShort, signUpErrorChecks.tooLong],
+    type: "password",
+    icon: "glyphicon glyphicon-lock"
+  });
 
-  vm.passwordConfirm = new MatchingFormField (
-    "passwordConfirm",
-    [signUpErrorChecks.valueNotMatching],
-    vm.password
-  );
+  passwordConfirm = new MatchingFormField({
+      name: "passwordConfirm",
+      dependantField: password
+  });
+
+  vm.formFields = [username, password, passwordConfirm];
 
   vm.credentialsSubmittable = false;
   vm.updateSubmittableStatus = () => {
-    [vm.username, vm.password, vm.passwordConfirm].forEach((field) => { field.updateErrors(); });
+    vm.formFields.forEach((field) => { field.updateErrors(); });
     vm.credentialsSubmittable = !_formFieldsContainValidationErrors();
-  }
+  };
 
   function _formFieldsContainValidationErrors() {
-    return (
-      vm.username.errors.length > 0 ||
-      vm.password.errors.length > 0 ||
-      vm.passwordConfirm.errors.length > 0
-    );
+    for (var idx = 0; idx < vm.formFields.length; idx++) {
+      let field = vm.formFields[idx];
+      if(field.errors.length > 0) return true;
+    }
+
+    return false;
   }
 
   vm.backendErrors = [];
   vm.submitCredentials = () => {
-    let newUser = {
-      username: vm.username.value,
-      password: vm.password.value,
-      passwordConfirm: vm.passwordConfirm.value
-    }
+    authenticationBackendRequests.signUp({
+      newUser: {
+        username: username.value,
+        password: password.value,
+      },
 
-    authenticationBackendRequests.signUp(
-      newUser,
-      vm.submitCredentialsSuccessCB,
-      vm.submitCredentialsFailureCB
-    );
+      successCB: () => { $state.go("dashboard"); },
+      failuerCB: (errors) => { vm.backendErrors = errors; }
+    });
   }
-  
-  vm.submitCredentialsSuccessCB = () => { $state.go("dashboard"); };
-  vm.submitCredentialsFailureCB = (errors) => { vm.backendErrors = errors; }
 }
 
 export default SignUpController;
