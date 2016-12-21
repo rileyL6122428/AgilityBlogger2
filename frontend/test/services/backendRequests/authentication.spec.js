@@ -32,7 +32,6 @@ describe("authenticationBackendRequests", () => {
   }));
 
   it("should be wired into the app", () => {
-    debugger
     expect(authenticationBackendRequests).toBeDefined();
   });
 
@@ -44,14 +43,17 @@ describe("authenticationBackendRequests", () => {
 
     it("should send an http post request to '/api/createAccount'", () => {
       $httpBackend.expectPOST('/api/createAccount').respond(200, SAVED_SAMPLE_USER);
-      authenticationBackendRequests.signUp(NEW_SAMPLE_USER);
+      authenticationBackendRequests.signUp({newUser: NEW_SAMPLE_USER});
       $httpBackend.flush();
     });
 
     describe("request is successful", () => {
       beforeEach(() => {
         $httpBackend.expectPOST('/api/createAccount').respond(200, { user: SAVED_SAMPLE_USER });
-        authenticationBackendRequests.signUp(NEW_SAMPLE_USER, successHandler);
+        authenticationBackendRequests.signUp({
+          newUser: NEW_SAMPLE_USER,
+          successCB: successHandler
+        });
         $httpBackend.flush();
       })
 
@@ -67,7 +69,13 @@ describe("authenticationBackendRequests", () => {
     it("should call a failure callback input by the method caller when the request fails", () => {
       var errorMessages = { errorMessages: [] }
       $httpBackend.expectPOST('/api/createAccount').respond(409, errorMessages);
-      authenticationBackendRequests.signUp(NEW_SAMPLE_USER, successHandler, errorHandler);
+      
+      authenticationBackendRequests.signUp({
+        newUser: NEW_SAMPLE_USER,
+        successCB: successHandler,
+        failureCB: errorHandler
+      });
+
       $httpBackend.flush();
 
       expect(errorHandler).toHaveBeenCalledWith(errorMessages);

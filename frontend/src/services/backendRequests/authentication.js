@@ -15,12 +15,12 @@ function AuthenticationBackendRequests($http, authenticationStore) {
     $http({
       url: "/api/createAccount",
       method: "POST",
-      data: { newUser: newUser },
+      data: { newUser: params.newUser },
     }).then(function success(response) {
       authenticationStore.setCurrentUser(response.data.user);
-      successCB();
+      params.successCB();
     }, function failure(response) {
-      failureCB(response.data);
+      params.failureCB(response.data);
     });
   }
 
