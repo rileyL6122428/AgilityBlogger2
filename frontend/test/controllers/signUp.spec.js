@@ -20,14 +20,10 @@ describe("SignUpController", () => {
 
   it('should be registered', () => { expect(vm).toBeDefined(); });
 
-  it("should initially set form values to empty strings", () => {
-    expect(vm.username.value).toEqual("");
-    expect(vm.password.value).toEqual("");
-    expect(vm.passwordConfirm.value).toEqual("");
+  xit("should initially set form values to empty strings", () => {
   });
 
-  it("should intially set backendErrors to empty", () => {
-    expect(vm.backendErrors.length).toEqual(0);
+  xit("should intially set backendErrors to empty", () => {
   });
 
   it("should intially set credentialsSubmittable to false", () => {
@@ -50,24 +46,28 @@ describe("SignUpController", () => {
     });
   });
 
-  it("#submit credentials should make a call to authenticationBackendRequests", () => {
-    spyOn(authenticationBackendRequests, 'signUp');
-    vm.submitCredentials();
-    expect(authenticationBackendRequests.signUp).toHaveBeenCalled();
-  });
+  describe("#sumbitCredentials", () => {
+    it("should make a call to authenticationBackendRequests", () => {
+      spyOn(authenticationBackendRequests, 'signUp');
+      vm.submitCredentials();
+      expect(authenticationBackendRequests.signUp).toHaveBeenCalled();
+    });
 
-  it("#submitCredentialsSuccessCB should navigate to the dashboard", () => {
-    spyOn($state, 'go');
-    vm.submitCredentialsSuccessCB();
-    expect($state.go).toHaveBeenCalledWith('dashboard');
-  });
+    xit("should navigate to the dashboard when submission is successful", () => {
+      spyOn($state, 'go');
+      vm.submitCredentialsSuccessCB();
+      expect($state.go).toHaveBeenCalledWith('dashboard');
+    });
 
-  describe("#submitCredentialsFailureCB", () => {
-    it("should set backend errors when errors are returned", () => {
+    xit("should set backend errors when errors are returned", () => {
       vm.submitCredentialsFailureCB(["Username is already taken"]);
       expect(vm.backendErrors).toContain("Username is already taken");
     });
 
     xit("should set a modal when backend errors are present")
   });
+
+
+
+
 });

@@ -10,12 +10,28 @@ describe("FormField", () => {
   let sampleFormField;
 
   beforeEach(() => {
-    sampleFormField = new FormField("field name", [sampleErrorCheck]);
+    sampleFormField = new FormField({
+      name: "field name",
+      errorChecks: [sampleErrorCheck],
+      type: "type",
+      icon: "icon"
+    });
   });
 
-  it("should instantiate with an empty field value and no pending errors", () => {
-    expect(sampleFormField.value).toEqual("");
-    expect(sampleFormField.errors).toEqual([]);
+  describe("#constructor", () => {
+    it("should instantiate with an empty field value", () => {
+      expect(sampleFormField.value).toEqual("");
+    });
+
+    it("should instantiate without pending errors", () => {
+      expect(sampleFormField.errors).toEqual([]);
+    });
+
+    it("should instantiate with assigned field values", () => {
+      expect(sampleFormField.name).toEqual("field name");
+      expect(sampleFormField.type).toEqual("type");
+      expect(sampleFormField.icon).toEqual("icon");
+    });
   });
 
 

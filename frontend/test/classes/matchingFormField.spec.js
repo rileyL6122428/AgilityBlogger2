@@ -4,12 +4,15 @@ import MatchingFormField from '../../src/classes/matchingFormField.js';
 
 describe("MathcingFormField", () => {
 
-  let sampleFormField = new FormField("sample field");
+  let sampleFormField = new FormField({name: "sample field"});
 
   let sampleMatchingFormField;
 
   beforeEach(() => {
-    sampleMatchingFormField = new MatchingFormField("sample matching field", sampleFormField);
+    sampleMatchingFormField = new MatchingFormField({
+      name: "sample matching field",
+      dependantField: sampleFormField
+    });
  });
 
  describe("#updateErrors", () => {
