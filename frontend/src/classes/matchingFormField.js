@@ -13,7 +13,6 @@ class MatchingFormField extends FormField {
 
   updateErrors() {
     this.errors = [];
-    debugger
     if(this.value !== this.dependantField.value) {
       this.errors.push("Does not match " + this.dependantField.name)
     }
