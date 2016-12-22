@@ -1,4 +1,4 @@
-import template from './form-field.html';
+import template from '../templates/form-field.html';
 
 function SignUpFormFieldDirective() {
   'ngInject';

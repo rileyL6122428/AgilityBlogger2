@@ -1,4 +1,4 @@
-function AuthenticationBackendRequests($http, authenticationStore) {
+function SubmitCredentialsApi($http, authenticationStore) {
   'ngInject';
 
   const EMPTY_CB = () => {};
@@ -29,4 +29,4 @@ function AuthenticationBackendRequests($http, authenticationStore) {
   });
 }
 
-export default AuthenticationBackendRequests;
+export default SubmitCredentialsApi;

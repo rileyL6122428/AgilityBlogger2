@@ -1,8 +1,8 @@
-import FormField from '../../classes/formField.js';
-import MatchingFormField from '../../classes/matchingFormField.js';
+import FormField from './classes/formField.js';
+import MatchingFormField from './classes/matchingFormField.js';
 import signUpErrorChecks from './_errorChecks.js';
 
-function SignUpController(authenticationBackendRequests, $state) {
+function SignUpController(SubmitCredentialsApi, $state) {
   'ngInject';
 
   let vm = this;
@@ -51,7 +51,7 @@ function SignUpController(authenticationBackendRequests, $state) {
 
   vm.backendErrors = [];
   vm.submitCredentials = () => {
-    authenticationBackendRequests.signUp({
+    SubmitCredentialsApi.signUp({
       newUser: {
         username: username.value,
         password: password.value,

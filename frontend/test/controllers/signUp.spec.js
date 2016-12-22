@@ -16,14 +16,17 @@ describe("SignUpController", () => {
     vm = $controller('signUp', {});
     $state = _$state_;
     authenticationBackendRequests = _authenticationBackendRequests_;
+    $httpBackend = _$httpBackend_;
   }));
 
-  it('should be registered', () => { expect(vm).toBeDefined(); });
+  it('should be registered', () => expect(vm).toBeDefined());
 
-  xit("should initially set form values to empty strings", () => {
+  it("should initially set form values to empty strings", () => {
+    vm.formFields.forEach((field) =>  expect(field.value).toEqual(""));
   });
 
-  xit("should intially set backendErrors to empty", () => {
+  it("should intially set backendErrors to empty", () => {
+    expect(vm.backendErrors).toEqual([]);
   });
 
   it("should intially set credentialsSubmittable to false", () => {
@@ -37,25 +40,24 @@ describe("SignUpController", () => {
       expect(vm.credentialsSubmittable).toBe(false);
     });
 
-    it("should set credentialsSubmittable to true when no errors are present in any of the form fields", () => {
-      vm.username.value = "username";
-      vm.password.value = "password";
-      vm.passwordConfirm.value = "password";
+    it("should set credentialsSubmittable to true when errors are not present in any form fields", () => {
+      vm.formFields.forEach((field) => { field.value = "SAMPLE_VALUE"; });
       vm.updateSubmittableStatus();
       expect(vm.credentialsSubmittable).toBe(true);
     });
   });
 
   describe("#sumbitCredentials", () => {
-    it("should make a call to authenticationBackendRequests", () => {
+    xit("should make a call to authenticationBackendRequests", () => {
       spyOn(authenticationBackendRequests, 'signUp');
       vm.submitCredentials();
-      expect(authenticationBackendRequests.signUp).toHaveBeenCalled();
+      expect(authenticationBackendRequests.signUp)
+          .toHaveBeenCalled();// NOTE CHANGE THIS TO HAVE BEEN CALLED WITH SPECIFIC SERVICE
     });
 
-    xit("should navigate to the dashboard when submission is successful", () => {
+    it("should navigate to the dashboard when submission is successful", () => {
       spyOn($state, 'go');
-      vm.submitCredentialsSuccessCB();
+      vm.submitCredentials();
       expect($state.go).toHaveBeenCalledWith('dashboard');
     });
 

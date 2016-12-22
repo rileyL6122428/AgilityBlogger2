@@ -1,4 +1,4 @@
-import signUpTemplate from './templates/sign-up.html';
+import signUpTemplate from './submodules/signUp/templates/sign-up.html';
 
 function routesConfig($stateProvider, $urlRouterProvider) {
   'ngInject';
@@ -10,10 +10,10 @@ function routesConfig($stateProvider, $urlRouterProvider) {
       template: "<div>THIS IS THE HOME TEMPLATE</div>",
     })
 
-    .state('signUp', {
+    .state('SignUp', {
         url: "/sign-up",
         template: signUpTemplate,
-        controller: "signUp as vm",
+        controller: "signUpController as vm",
     });
 }
 

@@ -1,4 +1,4 @@
-import ErrorCheck from '../../classes/errorCheck.js';
+import ErrorCheck from './classes/errorCheck.js';
 
 let signUpErrorChecks = {
   tooShort: new ErrorCheck(
