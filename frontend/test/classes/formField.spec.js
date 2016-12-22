@@ -1,5 +1,5 @@
-import FormField from '../../src/submodules/signUp/classes/formField.js';
-import ErrorCheck from '../../src/submodules/signUp/classes/errorCheck.js'
+import FormField from '../../src/submodules/authentication/classes/formField.js';
+import ErrorCheck from '../../src/submodules/authentication/classes/errorCheck.js'
 
 describe("FormField", () => {
   let sampleErrorCheck = new ErrorCheck(

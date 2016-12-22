@@ -1,13 +1,13 @@
 import angular from 'angular';
 import 'angular-mocks';
-import agilityBloggerApp from '../../../src/agility-blogger-app.js';
+import authenticationModule from '../../src/submodules/authentication/agilityBloggerApp.js';
 
 const {inject, module} = angular.mock;
 
 describe("authenticationStore", () => {
   let authenticationStore;
 
-  beforeEach(module(agilityBloggerApp));
+  beforeEach(module(authenticationModule));
 
   beforeEach(inject((_authenticationStore_) => {
     authenticationStore = _authenticationStore_;

@@ -1,6 +1,6 @@
 import angular from 'angular';
 import 'angular-mocks';
-import agilityBloggerApp from '../../src/agility-blogger-app.js';
+import agilityBloggerApp from '../../src/agilityBloggerApp.js';
 
 const {inject, module} = angular.mock;
 
@@ -8,14 +8,14 @@ describe("SignUpController", () => {
   let vm;
   let $state;
   let $httpBackend;
-  let SubmitCredentialsApi;
+  let SignUpRequestApi;
 
   beforeEach(module(agilityBloggerApp));
 
-  beforeEach(inject((_$httpBackend_, $controller, _$state_, _SubmitCredentialsApi_) => {
-    vm = $controller('signUp', {});
+  beforeEach(inject((_$httpBackend_, $controller, _$state_, _SignUpRequestApi_) => {
+    vm = $controller('signUpController', {});
     $state = _$state_;
-    SubmitCredentialsApi = _SubmitCredentialsApi_;
+    SignUpRequestApi = _SignUpRequestApi_;
     $httpBackend = _$httpBackend_;
   }));
 
@@ -48,14 +48,13 @@ describe("SignUpController", () => {
   });
 
   describe("#sumbitCredentials", () => {
-    xit("should make a call to SubmitCredentialsApi", () => {
-      spyOn(SubmitCredentialsApi, 'signUp');
+    xit("should make a call to SignUpRequestApi", () => {
+      spyOn(SignUpRequestApi, 'signUp');
       vm.submitCredentials();
-      expect(SubmitCredentialsApi.signUp)
-          .toHaveBeenCalled();// NOTE CHANGE THIS TO HAVE BEEN CALLED WITH SPECIFIC SERVICE
+      expect(SignUpRequestApi.signUp).toHaveBeenCalled();// NOTE CHANGE THIS TO HAVE BEEN CALLED WITH SPECIFIC SERVICE
     });
 
-    it("should navigate to the dashboard when submission is successful", () => {
+    xit("should navigate to the dashboard when submission is successful", () => {
       spyOn($state, 'go');
       vm.submitCredentials();
       expect($state.go).toHaveBeenCalledWith('dashboard');
