@@ -1,4 +1,4 @@
-function SubmitCredentialsApi($http, authenticationStore) {
+function SignUpRequestApi($http, authenticationStore) {
   'ngInject';
 
   const EMPTY_CB = () => {};
@@ -29,4 +29,4 @@ function SubmitCredentialsApi($http, authenticationStore) {
   });
 }
 
-export default SubmitCredentialsApi;
+export default SignUpRequestApi;

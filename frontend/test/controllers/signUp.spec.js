@@ -8,14 +8,14 @@ describe("SignUpController", () => {
   let vm;
   let $state;
   let $httpBackend;
-  let authenticationBackendRequests;
+  let SubmitCredentialsApi;
 
   beforeEach(module(agilityBloggerApp));
 
-  beforeEach(inject((_$httpBackend_, $controller, _$state_, _authenticationBackendRequests_) => {
+  beforeEach(inject((_$httpBackend_, $controller, _$state_, _SubmitCredentialsApi_) => {
     vm = $controller('signUp', {});
     $state = _$state_;
-    authenticationBackendRequests = _authenticationBackendRequests_;
+    SubmitCredentialsApi = _SubmitCredentialsApi_;
     $httpBackend = _$httpBackend_;
   }));
 
@@ -48,10 +48,10 @@ describe("SignUpController", () => {
   });
 
   describe("#sumbitCredentials", () => {
-    xit("should make a call to authenticationBackendRequests", () => {
-      spyOn(authenticationBackendRequests, 'signUp');
+    xit("should make a call to SubmitCredentialsApi", () => {
+      spyOn(SubmitCredentialsApi, 'signUp');
       vm.submitCredentials();
-      expect(authenticationBackendRequests.signUp)
+      expect(SubmitCredentialsApi.signUp)
           .toHaveBeenCalled();// NOTE CHANGE THIS TO HAVE BEEN CALLED WITH SPECIFIC SERVICE
     });
 

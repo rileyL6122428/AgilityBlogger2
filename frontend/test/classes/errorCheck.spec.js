@@ -1,4 +1,4 @@
-import ErrorCheck from '../../src/classes/errorCheck.js';
+import ErrorCheck from '../../src/submodules/signUp/classes/errorCheck.js';
 
 describe("ErrorCheck", () => {
   it("should instantiate with validation and error msg", () => {

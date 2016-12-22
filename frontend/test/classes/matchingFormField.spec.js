@@ -1,6 +1,6 @@
-import ErrorCheck from '../../src/classes/errorCheck.js';
-import FormField from '../../src/classes/formField.js';
-import MatchingFormField from '../../src/classes/matchingFormField.js';
+import ErrorCheck from '../../src/submodules/signUp/classes/errorCheck.js';
+import FormField from '../../src/submodules/signUp/classes/formField.js';
+import MatchingFormField from '../../src/submodules/signUp/classes/matchingFormField.js';
 
 describe("MathcingFormField", () => {
 

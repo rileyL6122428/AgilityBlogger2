@@ -26,7 +26,7 @@ function logError(error) {
 }
 
 gulp.task('scripts', function() {
-  var bundler = watchify(browserify('./frontend/src/agility-blogger-app.js', {
+  var bundler = watchify(browserify('./frontend/src/agilityBloggerApp.js', {
       debug: true,
       paths: ['./node_modules', './frontend/src'],
     }))

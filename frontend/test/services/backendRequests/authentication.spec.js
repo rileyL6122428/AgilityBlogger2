@@ -1,12 +1,12 @@
 import angular from 'angular';
 import 'angular-mocks';
-import agilityBloggerApp from '../../../src/agility-blogger-app.js';
+import SignUpModule from '../../../src/submodules/signUp/sign-up-module.js';
 
 const {inject, module} = angular.mock;
 
-describe("authenticationBackendRequests", () => {
+describe("SubmitCredentialsApi", () => {
   let $httpBackend,
-      authenticationBackendRequests,
+      SubmitCredentialsApi,
       authenticationStore,
       successHandler,
       errorHandler;
@@ -20,11 +20,11 @@ describe("authenticationBackendRequests", () => {
     id: 1
   };
 
-  beforeEach(module(agilityBloggerApp));
+  beforeEach(module(SignUpModule));
 
-  beforeEach(inject((_$httpBackend_, _authenticationBackendRequests_, _authenticationStore_) => {
+  beforeEach(inject((_$httpBackend_, _SubmitCredentialsApi_, _authenticationStore_) => {
     $httpBackend = _$httpBackend_;
-    authenticationBackendRequests = _authenticationBackendRequests_;
+    SubmitCredentialsApi = _SubmitCredentialsApi_;
     authenticationStore = _authenticationStore_;
 
     successHandler = jasmine.createSpy('successHandler');
@@ -32,7 +32,7 @@ describe("authenticationBackendRequests", () => {
   }));
 
   it("should be wired into the app", () => {
-    expect(authenticationBackendRequests).toBeDefined();
+    expect(SubmitCredentialsApi).toBeDefined();
   });
 
   describe("#signUp", () => {
@@ -43,14 +43,14 @@ describe("authenticationBackendRequests", () => {
 
     it("should send an http post request to '/api/createAccount'", () => {
       $httpBackend.expectPOST('/api/createAccount').respond(200, SAVED_SAMPLE_USER);
-      authenticationBackendRequests.signUp({newUser: NEW_SAMPLE_USER});
+      SubmitCredentialsApi.signUp({newUser: NEW_SAMPLE_USER});
       $httpBackend.flush();
     });
 
     describe("request is successful", () => {
       beforeEach(() => {
         $httpBackend.expectPOST('/api/createAccount').respond(200, { user: SAVED_SAMPLE_USER });
-        authenticationBackendRequests.signUp({
+        SubmitCredentialsApi.signUp({
           newUser: NEW_SAMPLE_USER,
           successCB: successHandler
         });
@@ -69,8 +69,8 @@ describe("authenticationBackendRequests", () => {
     it("should call a failure callback input by the method caller when the request fails", () => {
       var errorMessages = { errorMessages: [] }
       $httpBackend.expectPOST('/api/createAccount').respond(409, errorMessages);
-      
-      authenticationBackendRequests.signUp({
+
+      SubmitCredentialsApi.signUp({
         newUser: NEW_SAMPLE_USER,
         successCB: successHandler,
         failureCB: errorHandler

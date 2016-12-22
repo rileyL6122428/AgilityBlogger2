@@ -1,4 +1,4 @@
-import signUpTemplate from './submodules/signUp/templates/sign-up.html';
+import signUpTemplate from './submodules/authentication/templates/sign-up.html';
 
 function routesConfig($stateProvider, $urlRouterProvider) {
   'ngInject';
