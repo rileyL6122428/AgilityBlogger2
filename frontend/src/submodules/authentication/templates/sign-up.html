@@ -6,7 +6,7 @@
 
   <form class="form-horizontal sign-in-form">
 
-    <sign-up-form-field ng-repeat="(fieldName, field) in vm.formFields"
+    <sign-up-form-field ng-repeat="field in vm.form.fieldsList"
                         field="field"
                         update-submittable-status="vm.updateSubmittableStatus">
   </sign-up-form-field>
