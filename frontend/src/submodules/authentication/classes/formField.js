@@ -7,7 +7,7 @@ class FormField {
       type: "text",
       icon: ""
     }
-    
+
     let params = Object.assign(defaults, options);
 
     this.value = "";

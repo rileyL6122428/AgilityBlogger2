@@ -1,6 +1,6 @@
 import template from '../templates/form-field.html';
 
-function SignUpFormFieldDirective() {
+function SignUpFormFieldsDirective() {
   'ngInject';
 
   return ({
@@ -27,4 +27,4 @@ function SignUpFormFieldDirective() {
   });
 }
 
-export default SignUpFormFieldDirective;
+export default SignUpFormFieldsDirective;

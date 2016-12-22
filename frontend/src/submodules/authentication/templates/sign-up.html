@@ -6,17 +6,17 @@
 
   <form class="form-horizontal sign-in-form">
 
-    <sign-up-form-field ng-repeat="field in vm.form.fieldsList"
+    <sign-up-form-fields ng-repeat="field in vm.form.fieldsList"
                         field="field"
                         update-submittable-status="vm.updateSubmittableStatus">
-  </sign-up-form-field>
+    </sign-up-form-fields>
 
     <div class="form-group">
       <div class="col-xs-1 col-xs-offset-4">
         <button class="btn btn-danger">Cancel</button>
       </div>
       <div class="col-xs-1 col-xs-offset-1">
-        <button ng-disabled="!vm.credentialsSubmittable" class="btn btn-success">Sign Up</button>
+        <button ng-disabled="!vm.readyToSubmit" class="btn btn-success">Sign Up</button>
       </div>
     </div>
   </form>

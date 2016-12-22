@@ -3,6 +3,7 @@ import MatchingFormField from './matchingFormField.js';
 class Form {
   constructor() {
     this.fieldsList = [];
+    this.submittable = false;
   }
 
   addField(formField) {
