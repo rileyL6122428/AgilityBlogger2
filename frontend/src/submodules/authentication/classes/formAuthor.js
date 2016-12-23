@@ -1,4 +1,4 @@
-import MatchingFormField from './matchingFormField.js';
+]import MatchingFormField from './matchingFormField.js';
 
 class FormAuthor {
   constructor(form) {

@@ -22,36 +22,25 @@ describe("Form", () => {
     });
   });
 
-  it("should instantiate with and empty field List", () => {
-    expect(form.fieldsList).toEqual([]);
+  describe("#constructor", () => {
+    xit("should require Author, Submission, and Validation obj dependencies");
+    xit("should instantiate properly when dependent classes are injected");
+    xit("should instantitate with an empty fields list");
   });
 
   describe("#addField", () => {
-    it("should add a form field to the fieldsList", () => {
-      form.addField(formField);
-      expect(form.fieldsList).toContain(formField);
-    });
+    xit("should call author's #writeField");
   });
 
   describe("#addFieldWithCheck", () => {
-    it("should add a field with a matching field", () => {
-      form.addFieldWithCheck(formField);
-      let matchingFormField = form.fieldsList[1];
-
-      expect(form.fieldsList.length).toEqual(2);
-      expect(matchingFormField.name).toEqual("fieldNameConfirm");
-      expect(matchingFormField instanceof MatchingFormField).toBe(true);
-    });
+    xit("should call author's #writeFieldWithCheck");
   });
 
   describe("#submissionReport", () => {
-    it("should return an object containing field names pointing to their values", () => {
-      form.addField(formField);
+    xit("should call submitters #submission report");
+  });
 
-      let submissionReport = form.submissionReport();
-
-      expect(Object.keys(submissionReport).length).toEqual(1);
-      expect(submissionReport.fieldName).toEqual("");
-    });
+  describe("#containsValidationErrors", () => {
+    xit("should call validator's errors are present")
   });
 });
