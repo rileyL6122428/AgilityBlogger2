@@ -30,7 +30,6 @@ describe("Form", () => {
     });
   });
 
-
   it("should instantitate with an empty fields list", () => {
     expect(form.fieldsList).toEqual([]);
   });
