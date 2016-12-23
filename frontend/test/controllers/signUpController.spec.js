@@ -1,6 +1,7 @@
 import angular from 'angular';
 import 'angular-mocks';
 import agilityBloggerApp from '../../src/agilityBloggerApp.js';
+import Form from '../../src/submodules/authentication/classes/form.js';
 
 const {inject, module} = angular.mock;
 
@@ -21,54 +22,40 @@ describe("SignUpController", () => {
 
   it('should be registered', () => expect(vm).toBeDefined());
 
-  it("should initially set form values to empty strings", () => {
-    vm.formFields.forEach((field) =>  expect(field.value).toEqual(""));
+  it("should intialize with a form object", () => {
+    expect(vm.form).toBeDefined();
+    expect(vm.form instanceof Form).toBe(true);
   });
 
-  it("should intially set backendErrors to empty", () => {
-    expect(vm.backendErrors).toEqual([]);
-  });
-
-  it("should intially set credentialsSubmittable to false", () => {
-    expect(vm.credentialsSubmittable).toBe(false);
+  it("should intially set readyToSubmit to false", () => {
+    expect(vm.readyToSubmit).toBe(false);
   });
 
   describe("#updateSubmittableStatus", () => {
-    it("should set credentialsSubmittable to false when errors are present in any of the form fields", () => {
-      vm.credentialsSubmittable = true;
+    it("should set readyToSubmit to false when errors are present in any of the form fields", () => {
+      vm.readyToSubmit = true;
       vm.updateSubmittableStatus();
-      expect(vm.credentialsSubmittable).toBe(false);
+      expect(vm.readyToSubmit).toBe(false);
     });
 
-    it("should set credentialsSubmittable to true when errors are not present in any form fields", () => {
-      vm.formFields.forEach((field) => { field.value = "SAMPLE_VALUE"; });
+    it("should set readyToSubmit to true when errors are not present in any form fields", () => {
+      vm.form.fieldsList.forEach((field) => { field.value = "SAMPLE_VALUE"; });
       vm.updateSubmittableStatus();
-      expect(vm.credentialsSubmittable).toBe(true);
+      expect(vm.readyToSubmit).toBe(true);
     });
   });
 
-  describe("#sumbitCredentials", () => {
-    xit("should make a call to SignUpRequestApi", () => {
-      spyOn(SignUpRequestApi, 'signUp');
-      vm.submitCredentials();
-      expect(SignUpRequestApi.signUp).toHaveBeenCalled();// NOTE CHANGE THIS TO HAVE BEEN CALLED WITH SPECIFIC SERVICE
-    });
+  it("#sumbitCredentials should make a call to SignUpRequestApi", () => {
+    spyOn(SignUpRequestApi, 'signUp');
+    
+    vm.form.fieldsList.forEach((field) => { field.value = "SAMPLE_VALUE"; });
+    vm.submitCredentials();
 
-    xit("should navigate to the dashboard when submission is successful", () => {
-      spyOn($state, 'go');
-      vm.submitCredentials();
-      expect($state.go).toHaveBeenCalledWith('dashboard');
+    expect(SignUpRequestApi.signUp).toHaveBeenCalledWith({
+      username: "SAMPLE_VALUE",
+      password: "SAMPLE_VALUE"
     });
-
-    xit("should set backend errors when errors are returned", () => {
-      vm.submitCredentialsFailureCB(["Username is already taken"]);
-      expect(vm.backendErrors).toContain("Username is already taken");
-    });
-
-    xit("should set a modal when backend errors are present")
   });
-
-
 
 
 });

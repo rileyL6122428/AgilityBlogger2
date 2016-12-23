@@ -1,44 +1,29 @@
-import MatchingFormField from './matchingFormField.js';
+import FormSubmission from './formSubmission.js';
+import FormValidation from './FormValidation.js';
+import FormAuthor from './formAuthor.js';
 
 class Form {
   constructor() {
     this.fieldsList = [];
-    this.submittable = false;
+    this.author = new FormAuthor(this);
+    this.submitter = new FormSubmission(this);
+    this.validator = new FormValidation(this);
   }
 
   addField(formField) {
-    this.fieldsList.push(formField);
+    this.author.writeField(formField);
   }
 
   addFieldWithCheck(formField) {
-    this.addField(formField);
-    this.addField(new MatchingFormField({
-      name: formField.name + "Confirm",
-      dependantField: formField
-    }));
+    this.author.writeFieldWithCheck(formField);
   }
 
   submissionReport() {
-    let report = {};
-
-    this.fieldsList.forEach((field) => {
-      if(!(field instanceof MatchingFormField)) {
-        report[field.name] = field.value;
-      }
-    });
-
-    return report;
+    return this.submitter.submissionReport();
   }
 
   containsValidationErrors() {
-    this.fieldsList.forEach((field) => { field.updateErrors(); });
-
-    for(var idx = 0; idx < this.fieldsList.length; idx++) {
-      let field = this.fieldsList[idx];
-      if(field.errors.length > 0) return true;
-    }
-
-    return false;
+    return this.validator.errorsArePresent();
   }
 }
 
