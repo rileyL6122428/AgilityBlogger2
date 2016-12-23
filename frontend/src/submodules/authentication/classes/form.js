@@ -1,13 +1,9 @@
-import FormSubmission from './formSubmission.js';
-import FormValidation from './FormValidation.js';
-import FormAuthor from './formAuthor.js';
-
 class Form {
-  constructor() {
+  constructor(dependencies) {
     this.fieldsList = [];
-    this.author = new FormAuthor(this);
-    this.submitter = new FormSubmission(this);
-    this.validator = new FormValidation(this);
+    this.author = new dependencies.FormAuthor(this);
+    this.submitter = new dependencies.FormSubmission(this);
+    this.validator = new dependencies.FormValidation(this);
   }
 
   addField(formField) {

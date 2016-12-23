@@ -1,9 +1,9 @@
-function SignUpController(SignUpRequestApi, signUpForm, $state) {
+function SignUpController(SignUpRequestApi, signUpFormFactory, $state) {
   'ngInject';
 
   let vm = this;
 
-  vm.form = signUpForm.newForm();
+  vm.form = signUpFormFactory.newForm();
   vm.readyToSubmit = false;
   vm.updateSubmittableStatus = () => { vm.readyToSubmit = !vm.form.containsValidationErrors(); };
   vm.submitCredentials = () => { SignUpRequestApi.signUp(vm.form.submissionReport()); };

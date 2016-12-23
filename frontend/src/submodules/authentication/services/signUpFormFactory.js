@@ -1,12 +1,19 @@
 import Form from '../classes/form.js';
 import FormField from '../classes/formField.js';
 import signUpErrorChecks from '../constants/authErrorChecks';
+import FormSubmission from '../classes/formSubmission.js';
+import FormValidation from '../classes/FormValidation.js';
+import FormAuthor from '../classes/formAuthor.js';
 
-function SignUpForm() {
+function SignUpFormFactory() {
 
   function newForm() {
-    let form = new Form();
-    
+    let form = new Form({
+      FormAuthor: FormAuthor,
+      FormSubmission: FormSubmission,
+      FormValidation: FormValidation
+    });
+
     form.addField( new FormField ({
       name: "username",
       errorChecks: [
@@ -32,4 +39,4 @@ function SignUpForm() {
   return ({ newForm });
 }
 
-export default SignUpForm;
+export default SignUpFormFactory;
