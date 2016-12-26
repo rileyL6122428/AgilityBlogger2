@@ -1,6 +1,6 @@
-import ErrorCheck from '../../src/submodules/authentication/classes/errorCheck.js';
-import FormField from '../../src/submodules/authentication/classes/formField.js';
-import MatchingFormField from '../../src/submodules/authentication/classes/matchingFormField.js';
+import ErrorCheck from '../../../src/submodules/authentication/classes/errorCheck.js';
+import FormField from '../../../src/submodules/authentication/classes/formField.js';
+import MatchingFormField from '../../../src/submodules/authentication/classes/matchingFormField.js';
 
 describe("MathcingFormField", () => {
 

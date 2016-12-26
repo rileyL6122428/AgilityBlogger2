@@ -1,6 +1,6 @@
 import angular from 'angular';
 import 'angular-mocks';
-import SignUpModule from '../../../src/submodules/signUp/sign-up-module.js';
+import SignUpModule from '../../../../src/submodules/signUp/sign-up-module.js';
 
 const {inject, module} = angular.mock;
 

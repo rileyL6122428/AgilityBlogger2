@@ -1,7 +1,7 @@
 import angular from 'angular';
 import 'angular-mocks';
-import agilityBloggerApp from '../../src/agilityBloggerApp.js';
-import Form from '../../src/submodules/authentication/classes/form.js';
+import agilityBloggerApp from '../../../src/agilityBloggerApp.js';
+import Form from '../../../src/submodules/authentication/classes/form.js';
 
 const {inject, module} = angular.mock;
 
@@ -47,7 +47,7 @@ describe("SignUpController", () => {
 
   it("#sumbitCredentials should make a call to SignUpRequestApi", () => {
     spyOn(SignUpRequestApi, 'signUp');
-    
+
     vm.form.fieldsList.forEach((field) => { field.value = "SAMPLE_VALUE"; });
     vm.submitCredentials();
 

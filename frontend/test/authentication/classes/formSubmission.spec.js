@@ -1,10 +1,10 @@
-import Form from '../../src/submodules/authentication/classes/form.js';
-import FormField from '../../src/submodules/authentication/classes/formField.js';
-import MatchingFormField from '../../src/submodules/authentication/classes/matchingFormField.js';
+import Form from '../../../src/submodules/authentication/classes/form.js';
+import FormField from '../../../src/submodules/authentication/classes/formField.js';
+import MatchingFormField from '../../../src/submodules/authentication/classes/matchingFormField.js';
 
-import FormSubmission from '../../src/submodules/authentication/classes/formSubmission.js';
-import FormValidation from '../../src/submodules/authentication/classes/formValidation.js';
-import FormAuthor from '../../src/submodules/authentication/classes/formAuthor.js';
+import FormSubmission from '../../../src/submodules/authentication/classes/formSubmission.js';
+import FormValidation from '../../../src/submodules/authentication/classes/formValidation.js';
+import FormAuthor from '../../../src/submodules/authentication/classes/formAuthor.js';
 
 describe("FormSubmission", () => {
   let form, formField, formSubmitter;
