@@ -1,4 +1,5 @@
 import signUpTemplate from './submodules/authentication/templates/sign-up.html';
+import dashboardTemplate from './submodules/blogger/templates/dashboard.html'
 
 function routesConfig($stateProvider, $urlRouterProvider) {
   'ngInject';
@@ -18,7 +19,8 @@ function routesConfig($stateProvider, $urlRouterProvider) {
 
     .state('dashboard', {
         url: "/dashboard",
-        template: "<div>THIS IS THE DASHBOARD TEMPLATE</div>",
+        template: dashboardTemplate,
+        controller: "dashboardController as vm"
     });
 }
 

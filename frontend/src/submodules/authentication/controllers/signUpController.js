@@ -1,4 +1,4 @@
-function SignUpController(SignUpRequestApi, signUpFormFactory, $state) {
+function SignUpController(SignUpRequestApi, signUpFormFactory) {
   'ngInject';
 
   let vm = this;

@@ -2,12 +2,13 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 
 import authenticationModule from './submodules/authentication/authenticationModule.js';
-import storesModule from './submodules/storage/storesModule.js'
+import bloggerModule from './submodules/blogger/bloggerModule.js';
+
 import routesConfig from './routerConfig.js';
 
 const agilityBloggerApp = angular.module('agilityBloggerApp',
   [
-    storesModule,
+    bloggerModule,
     authenticationModule,
     uiRouter
   ]
