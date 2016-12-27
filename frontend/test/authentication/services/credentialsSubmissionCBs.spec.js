@@ -15,6 +15,14 @@ describe("CredentialsSubmisionCBs", () => {
 
   beforeEach(module(authenticationModule));
 
+  beforeEach(() => {
+    $state = { go: (value) => {} };
+
+    module(function ($provide) {
+      $provide.value('$state', $state);
+    });
+  });
+
   beforeEach(inject((_credentialsSubmissionCBs_, _authenticationStore_, _$state_) => {
     credentialsSubmissionCBs = _credentialsSubmissionCBs_;
     authenticationStore = _authenticationStore_;
@@ -22,13 +30,15 @@ describe("CredentialsSubmisionCBs", () => {
   }));
 
   describe("#successCB", () => {
-    xit("should store a user in the authenticationStore", () => {
+    it("should store a user in the authenticationStore", () => {
       credentialsSubmissionCBs.successCB(SUCCESS_RESPONSE);
-      expect(authenticationStore.getCurrentUser).toEqual(SUCCESS_RESPONSE.data.user);
+      expect(authenticationStore.getCurrentUser()).toEqual(SUCCESS_RESPONSE.data.user);
     });
 
-    xit("should send the user to the dashboard", () => {
-
+    it("should send the user to the dashboard", () => {
+      spyOn($state, "go");
+      credentialsSubmissionCBs.successCB(SUCCESS_RESPONSE);
+      expect($state.go).toHaveBeenCalledWith("dashboard");
     });
   });
 });

@@ -1,9 +1,7 @@
 function CredentialsSubmissionCBs (authenticationStore, $state) {
-// function CredentialsSubmissionCBs (authenticationStore) {
 
   return ({
     successCB: (response) => {
-      debugger
       authenticationStore.setCurrentUser(response.data.user);
       $state.go('dashboard');
     },
