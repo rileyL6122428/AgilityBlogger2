@@ -10,12 +10,14 @@ class AuthenticationController {
   AuthenticationService authService = new AuthenticationService();
 
   def createAccount() {
-    def user = authService.createUser(request.JSON)
+    // def user = authService.createUser(request.JSON)
+    def user = authService.createUser(params)
 
     if(user){
       response.status = 201
       session.user = [username: user.username]
-      sendUser(user)
+      // sendUser(user)
+      render(view:"user", model: [user: user]);
     } else {
       response.status = 409;
       sendErrorMessages(authService.createUserErrorMsgs(request.JSON))
@@ -41,11 +43,10 @@ class AuthenticationController {
 
   def sessionUser() {
     if(session.user) {
-      def user = User.findByUsername(session.user.username)
-      sendUser(user)
+      sendUser(authService.findSessionUser(session))
     } else {
       response.status = 401
-      sendErrorMessages(["User not signed in"])
+      sendErrorMessages(authService.findSessionUserErrorMsgs())
     }
   }
 

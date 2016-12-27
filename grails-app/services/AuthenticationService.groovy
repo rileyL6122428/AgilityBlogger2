@@ -35,5 +35,11 @@ class AuthenticationService {
     return [notification: "Signed out successfully"]
   }
 
-  
+  def findSessionUser(session) {
+    return User.findByUsername(session.user.username)
+  }
+
+  def findSessionUserErrorMsgs() {
+    return ["User not signed in"];
+  }
 }
