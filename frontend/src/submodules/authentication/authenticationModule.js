@@ -10,7 +10,7 @@ import SignUpFormFactory from './services/signUpFormFactory.js'
 
 const authenticationModule = angular.module('authenticationModule', [uiRouter])
     .directive('signUpFormFields', SignUpFormFieldsDirective)
-    .service('credentialsSubmissionCBs', [CredentialsSubmissionCBs])
+    .service('credentialsSubmissionCBs', CredentialsSubmissionCBs)
     .service('SignUpRequestApi', SignUpRequestApi)
     .service('signUpFormFactory', SignUpFormFactory)
     .service('authenticationStore', AuthenticationStore)
