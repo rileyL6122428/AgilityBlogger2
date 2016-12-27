@@ -7,8 +7,10 @@ class AuthenticationController {
 
   static responseFormats = ['json', 'xml']
 
+  AuthenticationService authService = new AuthenticationService();
+
   def createAccount() {
-    def user = new User(request.JSON).save(flush: true)
+    def user = authService.createUser(request.JSON)
 
     if(user){
       response.status = 201
@@ -16,44 +18,25 @@ class AuthenticationController {
       sendUser(user)
     } else {
       response.status = 409;
-      sendErrorMessages(errorMessagesForCreateAccount())
+      sendErrorMessages(authService.createUserErrorMsgs(request.JSON))
     }
-  }
-
-  def errorMessagesForCreateAccount() {
-    def errorMessageList = []
-    def userParams = request.JSON
-
-    if(!userParams.password || userParams.password.length() == 0) {
-      errorMessageList.push("Password field is empty")
-    }
-    if(!userParams.username || userParams.username.length() == 0) {
-      errorMessageList.push("Username field is empty")
-    }
-    if(User.findByUsername(userParams.username)){
-      errorMessageList.push("Username is already taken")
-    }
-
-    return errorMessageList
   }
 
   def logIn() {
-    def userParams = request.JSON
-    def user = User.findByUsernameAndPassword(userParams.username, userParams.password)
+    def user = authService.findUser(request.JSON)
 
     if(user) {
       session["user"] = [username: user.username]
       sendUser(user)
     } else {
       response.status = 409
-      sendErrorMessages(["user cannot be found with given params"])
+      sendErrorMessages(authService.findUserErrorMsgs())
     }
   }
 
   def signOut() {
     session["user"] = null
-    def signOutNotification = [notification: "Signed out successfully"]
-    render signOutNotification as JSON
+    render authService.signOutNotification() as JSON
   }
 
   def sessionUser() {
