@@ -1,4 +1,4 @@
-function SignUpRequestApi($http, authenticationStore, credentialsSubmissionCBs) {
+function SignUpRequestApi($http, credentialsSubmissionCBs) {
   'ngInject';
 
   function signUp(newUser) {
