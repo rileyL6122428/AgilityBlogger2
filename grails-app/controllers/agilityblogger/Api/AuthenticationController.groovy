@@ -22,14 +22,15 @@ class AuthenticationController {
 
   def errorMessagesForCreateAccount() {
     def errorMessageList = []
+    def userParams = request.JSON
 
-    if(!params.password || params.password.length() == 0) {
+    if(!userParams.password || userParams.password.length() == 0) {
       errorMessageList.push("Password field is empty")
     }
-    if(!params.username || params.username.length() == 0) {
+    if(!userParams.username || userParams.username.length() == 0) {
       errorMessageList.push("Username field is empty")
     }
-    if(User.findByUsername(params.username)){
+    if(User.findByUsername(userParams.username)){
       errorMessageList.push("Username is already taken")
     }
 
@@ -37,7 +38,8 @@ class AuthenticationController {
   }
 
   def logIn() {
-    def user = User.findByUsernameAndPassword(params.username, params.password)
+    def userParams = request.JSON
+    def user = User.findByUsernameAndPassword(userParams.username, userParams.password)
 
     if(user) {
       session["user"] = [username: user.username]
@@ -75,5 +77,4 @@ class AuthenticationController {
     def errorMessages =  [errorMessages: errorMessageList]
     render errorMessages as JSON
   }
-
 }

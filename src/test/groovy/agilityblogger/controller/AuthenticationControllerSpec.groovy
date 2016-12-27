@@ -16,8 +16,7 @@ class AuthControllerSpec extends Specification {
 
     void "#createAccount sends an error message when password field is empty"() {
       given:
-        params.username = 'username'
-        params.password = ''
+        request.json = '{"username": "username", "password": ""}'
       when:
         controller.createAccount()
       then:
@@ -28,8 +27,7 @@ class AuthControllerSpec extends Specification {
 
     void "#createAccount sends an error message when username field is empty"() {
       given:
-        params.username = ''
-        params.password = 'password'
+        request.json = '{"username": "", "password": "password"}'
       when:
         controller.createAccount()
       then:
@@ -41,8 +39,7 @@ class AuthControllerSpec extends Specification {
     void "#createAccount sends an error message when the username is already taken"() {
       given:
         new User(username: "username", password: "password").save(flush: true)
-        params.username = 'username'
-        params.password = 'password'
+        request.json = '{"username": "username", "password": "password"}'
       when:
         controller.createAccount()
       then:
@@ -73,8 +70,7 @@ class AuthControllerSpec extends Specification {
     void "#logIn returns an error message when user cannot be found with given params"() {
       given:
         new User(username: "username", password: "password").save(flush: true)
-        params.username = 'userna'
-        params.password = 'passwo'
+        request.json = '{"username": "userna", "password": "passwo"}'
       when:
         controller.logIn()
       then:
@@ -83,11 +79,10 @@ class AuthControllerSpec extends Specification {
         controller.response.json.user == null
     }
 
-    void "#logIn set the session for, and returns user when proper params are submitted"() {
+    void "#logIn sets the session for, and returns user when proper params are submitted"() {
       given:
         new User(username: "username", password: "password").save(flush: true)
-        params.username = 'username'
-        params.password = 'password'
+        request.json = '{"username": "username", "password": "password"}'
       when:
         controller.logIn()
       then:
