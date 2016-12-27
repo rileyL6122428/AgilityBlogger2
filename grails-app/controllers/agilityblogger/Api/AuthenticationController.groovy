@@ -8,11 +8,11 @@ class AuthenticationController {
   static responseFormats = ['json', 'xml']
 
   def createAccount() {
-    def user = new User(params).save(flush: true)
+    def user = new User(request.JSON).save(flush: true)
 
     if(user){
       response.status = 201
-      session.user = [username: params.username]
+      session.user = [username: user.username]
       sendUser(user)
     } else {
       response.status = 409;

@@ -16,7 +16,7 @@
         <button class="btn btn-danger">Cancel</button>
       </div>
       <div class="col-xs-1 col-xs-offset-1">
-        <button ng-disabled="!vm.readyToSubmit" class="btn btn-success">Sign Up</button>
+        <button ng-disabled="!vm.readyToSubmit" ng-click="vm.submitCredentials()" class="btn btn-success">Sign Up</button>
       </div>
     </div>
   </form>

@@ -53,8 +53,8 @@ class AuthControllerSpec extends Specification {
 
     void "#createAccount sends, sets the session for, and persists a user when proper params are submitted"() {
       given:
-        params.username = 'username'
-        params.password = 'password'
+        request.method = 'POST'
+        request.json = '{"username": "username", "password": "password"}'
       when:
         controller.createAccount()
       then:

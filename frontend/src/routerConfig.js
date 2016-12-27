@@ -14,6 +14,11 @@ function routesConfig($stateProvider, $urlRouterProvider) {
         url: "/sign-up",
         template: signUpTemplate,
         controller: "signUpController as vm",
+    })
+
+    .state('dashboard', {
+        url: "/dashboard",
+        template: "<div>THIS IS THE DASHBOARD TEMPLATE</div>",
     });
 }
 

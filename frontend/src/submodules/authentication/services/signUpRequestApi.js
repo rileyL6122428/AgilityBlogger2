@@ -5,7 +5,7 @@ function SignUpRequestApi($http, authenticationStore, credentialsSubmissionCBs) 
     $http({
       url: "/api/createAccount",
       method: "POST",
-      data: { newUser: newUser },
+      data: newUser ,
     }).then(
       credentialsSubmissionCBs.successCB,
       credentialsSubmissionCBs.failureCB
