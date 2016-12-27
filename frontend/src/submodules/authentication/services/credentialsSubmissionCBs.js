@@ -1,6 +1,4 @@
-function CredentialsSubmissionCBs ($state, authenticationStore) {
-
-  var errorReceiver = null;
+function CredentialsSubmissionCBs (authenticationStore, $state) {
 
   return ({
     successCB: (response) => {

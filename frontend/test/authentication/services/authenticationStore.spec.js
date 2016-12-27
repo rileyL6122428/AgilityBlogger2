@@ -1,6 +1,6 @@
 import angular from 'angular';
 import 'angular-mocks';
-import authenticationModule from '../../../src/submodules/authentication/agilityBloggerApp.js';
+import authenticationModule from '../../../src/submodules/authentication/authenticationModule.js';
 
 const {inject, module} = angular.mock;
 
