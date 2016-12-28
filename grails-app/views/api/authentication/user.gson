@@ -1,8 +1,0 @@
-model {
-  User user
-}
-
-json.user {
-  username user.username
-  id user.id
-}

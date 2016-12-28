@@ -1,7 +1,0 @@
-model {
-  def errors
-}
-
-json.errors {
-  list errors
-}
