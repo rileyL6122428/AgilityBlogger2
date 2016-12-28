@@ -7,52 +7,61 @@ class AuthenticationController {
 
   static responseFormats = ['json', 'xml']
 
-  AuthenticationService authService = new AuthenticationService();
+  AuthenticationService authService = new AuthenticationService()
+  JSONFormatter formatter = new JSONFormatter()
 
   def createAccount() {
+    def responseBody
     def user = authService.createUser(request.JSON)
 
     if(user){
       response.status = 201
       session.user = [username: user.username]
-      render(view:"/api/authentication/user", model: [user: user])
-
+      responseBody = formatter.formatUser(user)
     } else {
       response.status = 409;
-      def errors = authService.createUserErrorMsgs(request.JSON)
-      render(view:"/api/errors", model: [errors: errors])
+      responseBody = formatter.formatErrors(authService.createUserErrorMsgs(request.JSON))
     }
+
+    render responseBody as JSON
   }
 
   def logIn() {
+    def responseBody
     def user = authService.findUser(request.JSON)
 
     if(user) {
       session["user"] = [username: user.username]
-      render(view:"/api/authentication/user", model: [user: user])
-
+      responseBody = formatter.formatUser(user)
     } else {
       response.status = 409
-      def errors = authService.findUserErrorMsgs()
-      render(view:"/api/errors", model: [errors: errors])
+      responseBody = formatter.formatErrors(authService.findUserErrorMsgs())
     }
+
+    render responseBody as JSON
   }
 
   def signOut() {
+    def responseBody
+
     session["user"] = null
-    render(view: "/api/authentication/signOut")
+    responseBody = formatter.formatNotification("Sign out successful")
+
+    render responseBody as JSON
   }
 
   def sessionUser() {
+    def responseBody
+
     if(session.user) {
       def user = authService.findSessionUser(session)
-      render(view:"/api/authentication/user", model: [user: user])
-
+      def responseBody = formatter.formatUser(user)
     } else {
       response.status = 401
-      def errors = authService.findSessionUserErrorMsgs()
-      render(view:"/api/errors", model: [errors: errors])
+      responseBody = formatter.formatErrors(authService.findSessionUserErrorMsgs())
     }
+
+    render responseBody as JSON
   }
 
 }
