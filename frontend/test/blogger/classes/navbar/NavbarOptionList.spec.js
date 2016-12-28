@@ -19,7 +19,7 @@ describe("NavbarOptionList", () => {
   });
 
   it("should instantiate with a list of options", () => {
-    expect(navbarOptionList.options).toEqual([]);
+    expect(navbarOptionList.getOptions()).toEqual([]);
   });
 
   describe("#addOption", () => {

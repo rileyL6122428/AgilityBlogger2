@@ -7,7 +7,7 @@ describe("NavbarOption", () => {
       address: "sample-address"
     });
 
-    expect(navbarOption.text).toEqual("sample text");
-    expect(navbarOption.address).toEqual("sample-address");
+    expect(navbarOption.getText()).toEqual("sample text");
+    expect(navbarOption.getAddress()).toEqual("sample-address");
   });
 });
