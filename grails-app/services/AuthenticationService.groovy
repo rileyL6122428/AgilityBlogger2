@@ -31,10 +31,6 @@ class AuthenticationService {
     return ["user cannot be found with given params"]
   }
 
-  def signOutNotification() {
-    return [notification: "Signed out successfully"]
-  }
-
   def findSessionUser(session) {
     return User.findByUsername(session.user.username)
   }

@@ -1,0 +1,7 @@
+model {
+  ArrayList errors
+}
+
+json.errors {
+  list errors
+}

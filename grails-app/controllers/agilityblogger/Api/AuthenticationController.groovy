@@ -10,17 +10,17 @@ class AuthenticationController {
   AuthenticationService authService = new AuthenticationService();
 
   def createAccount() {
-    // def user = authService.createUser(request.JSON)
-    def user = authService.createUser(params)
+    def user = authService.createUser(request.JSON)
 
     if(user){
       response.status = 201
       session.user = [username: user.username]
-      render(view:"/api/authentication/user", model: [user: user]);
+      render(view:"/api/authentication/user", model: [user: user])
 
     } else {
       response.status = 409;
-      sendErrorMessages(authService.createUserErrorMsgs(request.JSON))
+      def errors = authService.createUserErrorMsgs(request.JSON)
+      render(view:"/api/errors", model: [errors: errors])
     }
   }
 
@@ -29,36 +29,30 @@ class AuthenticationController {
 
     if(user) {
       session["user"] = [username: user.username]
-      sendUser(user)
+      render(view:"/api/authentication/user", model: [user: user])
+
     } else {
       response.status = 409
-      sendErrorMessages(authService.findUserErrorMsgs())
+      def errors = authService.findUserErrorMsgs()
+      render(view:"/api/errors", model: [errors: errors])
     }
   }
 
   def signOut() {
     session["user"] = null
-    render authService.signOutNotification() as JSON
+    render(view: "/api/authentication/signOut")
   }
 
   def sessionUser() {
     if(session.user) {
-      sendUser(authService.findSessionUser(session))
+      def user = authService.findSessionUser(session)
+      render(view:"/api/authentication/user", model: [user: user])
+
     } else {
       response.status = 401
-      sendErrorMessages(authService.findSessionUserErrorMsgs())
+      def errors = authService.findSessionUserErrorMsgs()
+      render(view:"/api/errors", model: [errors: errors])
     }
   }
 
-  //NOTE HELPER METHODS BELOW
-  def sendUser(rawUser) {
-    render(contentType:"text/json"){
-      user(username: rawUser.username, id: rawUser.id)
-    }
-  }
-
-  def sendErrorMessages(errorMessageList){
-    def errorMessages =  [errorMessages: errorMessageList]
-    render errorMessages as JSON
-  }
 }

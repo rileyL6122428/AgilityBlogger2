@@ -21,8 +21,9 @@ class AuthControllerSpec extends Specification {
         controller.createAccount()
       then:
         controller.response.status == 409
-        controller.response.json.errorMessages.contains("Password field is empty") == true
-        controller.response.json.user == null
+        view == '/api/errors'
+        model.errors.size() == 1
+        model.errors[0] == 'Password field is empty'
     }
 
     void "#createAccount sends an error message when username field is empty"() {
@@ -32,8 +33,9 @@ class AuthControllerSpec extends Specification {
         controller.createAccount()
       then:
         controller.response.status == 409
-        controller.response.json.errorMessages.contains("Username field is empty") == true
-        controller.response.json.user == null
+        view == '/api/errors'
+        model.errors.size() == 1
+        model.errors[0] == "Username field is empty"
     }
 
     void "#createAccount sends an error message when the username is already taken"() {
@@ -44,8 +46,9 @@ class AuthControllerSpec extends Specification {
         controller.createAccount()
       then:
         controller.response.status == 409
-        controller.response.json.errorMessages.contains("Username is already taken") == true
-        controller.response.json.user == null
+        view == '/api/errors'
+        model.errors.size() == 1
+        model.errors[0] == "Username is already taken"
     }
 
     void "#createAccount sends, sets the session for, and persists a user when proper params are submitted"() {
@@ -56,8 +59,8 @@ class AuthControllerSpec extends Specification {
         controller.createAccount()
       then:
         controller.response.status == 201
-        controller.response.json.errorMessages == null
-        controller.response.json.user.username == "username"
+        view == '/api/authentication/user'
+        model.user.username == "username"
 
         session.user.username == 'username'
 
@@ -75,8 +78,9 @@ class AuthControllerSpec extends Specification {
         controller.logIn()
       then:
         controller.response.status == 409
-        controller.response.json.errorMessages.contains("user cannot be found with given params") == true
-        controller.response.json.user == null
+        view == '/api/errors'
+        model.errors.size() == 1
+        model.errors[0] == "user cannot be found with given params"
     }
 
     void "#logIn sets the session for, and returns user when proper params are submitted"() {
@@ -94,8 +98,8 @@ class AuthControllerSpec extends Specification {
         allPersistedUsers[0].username == "username"
         allPersistedUsers[0].password == "password"
 
-        controller.response.json.errorMessages == null
-        controller.response.json.user.username == "username"
+        view == '/api/authentication/user'
+        model.user.username == "username"
     }
 
     void "#signOut nulls the session and returns a success message"() {
@@ -106,7 +110,7 @@ class AuthControllerSpec extends Specification {
       then:
         session.user == null
         controller.response.status == 200
-        controller.response.json.notification == "Signed out successfully"
+        view == '/api/authentication/signOut'
     }
 
     void "#sessionUser returns a user when a session user is set"() {
@@ -117,7 +121,8 @@ class AuthControllerSpec extends Specification {
         controller.sessionUser()
       then:
         controller.response.status == 200
-        controller.response.json.user.username == "username"
+        view == '/api/authentication/user'
+        model.user.username == "username"
     }
 
     void "#sessionUser returns an error message when a session user is not set"() {
@@ -125,8 +130,9 @@ class AuthControllerSpec extends Specification {
         controller.sessionUser()
       then:
         controller.response.status == 401
-        controller.response.json.user == null
-        controller.response.json.errorMessages.contains("User not signed in") == true
+        view == '/api/errors'
+        model.errors.size() == 1
+        model.errors[0] == "User not signed in"
     }
 
 }
