@@ -1,6 +1,6 @@
 export default class BlogList {
-  constructor() {
-    this.blogs = [];
+  constructor(blogList) {
+    this.blogs = blogList;
   }
 
   getBlogs() {

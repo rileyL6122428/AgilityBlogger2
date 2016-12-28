@@ -1,16 +1,17 @@
 import BlogList from '../../../../src/submodules/blogger/classes/blog/BlogList.js';
+import Blog from '../../../../src/submodules/blogger/classes/blog/Blog.js';
 
 describe("BlogList", () => {
-  let blogList, storedBlog1, storedBlog2;
+  let blogList, blog1, blog2;
 
   beforeEach(() => {
-    storedBlog1 = { name: "storedBlog1" };
-    storedBlog2 = { name: "storedBlog2" };
+    blog1 = new Blog({ name: "blog1" });
+    blog2 = new Blog({ name: "blog2" });
 
-    blogList = new BlogList([storedBlog1, storedBlog2]);
+    blogList = new BlogList([blog1, blog2]);
   });
 
-  xit("should instantiate with a list of stored blogs", () => {
-
+  it("should instantiate with a list of stored blogs", () => {
+    expect(blogList.getBlogs()).toEqual([blog1, blog2]);
   });
 });
