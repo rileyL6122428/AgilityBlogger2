@@ -55,7 +55,7 @@ class AuthenticationController {
 
     if(session.user) {
       def user = authService.findSessionUser(session)
-      def responseBody = formatter.formatUser(user)
+      responseBody = formatter.formatUser(user)
     } else {
       response.status = 401
       responseBody = formatter.formatErrors(authService.findSessionUserErrorMsgs())
