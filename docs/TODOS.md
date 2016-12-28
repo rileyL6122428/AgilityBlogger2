@@ -1,15 +1,16 @@
-0. Continue refactor of auth controller with service and separate out json
-  formatting into a view, then redo unit tests
+###PRIORITY
 
-1. add unit tests for
-    - directives:
-      * signUpFormFields
+1. Begin blogger module with dashboard component
 
-2. add action buttons directives
-3. rework authentication controller tests for post actions
-4. refactor backend user to separate service code (look up) into it's own service
- && setup backend dependency injection
+###BACKBURNER
 
-5. start login
-6. Begin blogger module with dashboard component
+1. test auth service
+2. mock auth service in auth controller tests
+3. add unit tests for
+  - directives:
+    * signUpFormFields
+4. add action buttons directives for sign up screen
+5. setup backend dependency injection
+6. start login
 7. hook up spring security framework
+8. make login responsive
