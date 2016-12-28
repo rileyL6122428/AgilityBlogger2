@@ -16,8 +16,8 @@ class AuthenticationController {
     if(user){
       response.status = 201
       session.user = [username: user.username]
-      // sendUser(user)
-      render(view:"user", model: [user: user]);
+      render(view:"/api/authentication/user", model: [user: user]);
+
     } else {
       response.status = 409;
       sendErrorMessages(authService.createUserErrorMsgs(request.JSON))

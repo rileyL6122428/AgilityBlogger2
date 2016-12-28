@@ -1,5 +1,5 @@
 0. Continue refactor of auth controller with service and separate out json
-  formatting into a view
+  formatting into a view, then redo unit tests
 
 1. add unit tests for
     - directives:

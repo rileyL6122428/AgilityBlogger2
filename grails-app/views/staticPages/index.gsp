@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" class="no-js">
-  <g:render template="./indexHeader"/>
+  <g:render template="/staticPages/indexHeader"/>
 
   <body ng-app="agilityBloggerApp">
       <div id="content" ui-view ></div>
