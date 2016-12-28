@@ -4,9 +4,6 @@ import grails.test.mixin.TestFor
 import spock.lang.Specification
 import grails.test.mixin.Mock
 
-/**
- * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
- */
 @TestFor(AuthenticationController)
 @Mock(User)
 class AuthControllerSpec extends Specification {
