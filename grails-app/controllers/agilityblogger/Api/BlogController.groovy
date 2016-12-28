@@ -11,13 +11,16 @@ class BlogController {
   JSONFormatter formatter = new JSONFormatter()
 
   def getUserBlogs() {
+    def responseBody
     def authorBlogs = blogService.blogsForAuthor(params.authorName)
 
     if(authorBlogs) {
-      render formatter.formatBlogs(authorBlogs) as JSON
-
+      responseBody = formatter.formatBlogs(authorBlogs)
     } else {
-      render formatter.formatErrors(blogService.blogsForAuthorErrors(params.authorName)) as JSON
+      def errors = blogService.blogsForAuthorErrors(params.authorName)
+      responseBody = formatter.formatErrors(errors)
     }
+
+    render responseBody as JSON
   }
 }
