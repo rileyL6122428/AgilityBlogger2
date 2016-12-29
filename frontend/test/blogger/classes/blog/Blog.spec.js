@@ -1,10 +1,11 @@
 import Blog from '../../../../src/submodules/blogger/classes/blog/Blog.js';
+import SampleBlogData from '../../utils/dataFactories/BlogDataFactory.js';
 
 describe("Blog", () => {
   let blog, blogData;
 
   beforeEach(() => {
-    blogData = { name: "sample name" };
+    blogData = SampleBlogData({ id: 1, authorId: 1 });
     blog = new Blog(blogData);
   });
 

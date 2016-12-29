@@ -1,13 +1,12 @@
 import FilterableBlogList from '../../../../src/submodules/blogger/classes/blog/FilterableBlogList.js';
-import Blog from '../../../../src/submodules/blogger/classes/blog/Blog.js';
+import SampleBlogData from '../../utils/dataFactories/BlogDataFactory.js';
 
 describe("FilterableBlogList", () => {
   let blogList, blog1, blog2;
 
   beforeEach(() => {
-    blog1 = new Blog({ name: "blog1" });
-    blog2 = new Blog({ name: "blog2" });
-
+    blog1 = SampleBlogData({ id: 1, authorId: 1});
+    blog2 = SampleBlogData({ id: 2, authorId: 1});
     blogList = new FilterableBlogList([blog1, blog2]);
   });
 
