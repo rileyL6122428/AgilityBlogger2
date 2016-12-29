@@ -9,13 +9,13 @@ describe("SignUpController", () => {
   let vm;
   let $state;
   let $httpBackend;
-  let SignUpRequestApi;
+  let authRequestApi;
 
   beforeEach(module(agilityBloggerApp));
 
-  beforeEach(inject(($controller, _SignUpRequestApi_) => {
+  beforeEach(inject(($controller, _authRequestApi_) => {
     vm = $controller('signUpController', {});
-    SignUpRequestApi = _SignUpRequestApi_;
+    authRequestApi = _authRequestApi_;
   }));
 
   it('should be registered', () => expect(vm).toBeDefined());
@@ -23,10 +23,6 @@ describe("SignUpController", () => {
   it("should intialize with a form object", () => {
     expect(vm.form).toBeDefined();
     expect(vm.form instanceof Form).toBe(true);
-  });
-
-  it("should intially set readyToSubmit to false", () => {
-    expect(vm.readyToSubmit).toBe(false);
   });
 
   describe("#updateSubmittableStatus", () => {
@@ -43,13 +39,13 @@ describe("SignUpController", () => {
     });
   });
 
-  it("#sumbitCredentials should make a call to SignUpRequestApi", () => {
-    spyOn(SignUpRequestApi, 'signUp');
+  it("#sumbitCredentials should make a call to authRequestApi", () => {
+    spyOn(authRequestApi, 'signUp');
 
     vm.form.fieldsList.forEach((field) => { field.value = "SAMPLE_VALUE"; });
     vm.submitCredentials();
 
-    expect(SignUpRequestApi.signUp).toHaveBeenCalledWith({
+    expect(authRequestApi.signUp).toHaveBeenCalledWith({
       username: "SAMPLE_VALUE",
       password: "SAMPLE_VALUE"
     });

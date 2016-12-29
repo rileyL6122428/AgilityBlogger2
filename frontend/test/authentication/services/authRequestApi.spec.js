@@ -4,9 +4,9 @@ import authenticationModule from '../../../src/submodules/authentication/authent
 
 const {inject, module} = angular.mock;
 
-describe("SignUpRequestApi", () => {
+describe("AuthRequestApi", () => {
   let $httpBackend,
-      SignUpRequestApi,
+      authRequestApi,
       credentialsSubmissionCBs;
 
   const NEW_USER = { username: "TEST_USER", password: "PASSWORD" };
@@ -25,13 +25,13 @@ describe("SignUpRequestApi", () => {
     });
   });
 
-  beforeEach(inject((_$httpBackend_, _SignUpRequestApi_) => {
+  beforeEach(inject((_$httpBackend_, _authRequestApi_) => {
     $httpBackend = _$httpBackend_;
-    SignUpRequestApi = _SignUpRequestApi_;
+    authRequestApi = _authRequestApi_;
   }));
 
   it("should be wired into the app", () => {
-    expect(SignUpRequestApi).toBeDefined();
+    expect(authRequestApi).toBeDefined();
   });
 
   describe("#signUp", () => {
@@ -44,7 +44,7 @@ describe("SignUpRequestApi", () => {
       spyOn(credentialsSubmissionCBs, "successCB");
 
       $httpBackend.expectPOST('/api/createAccount').respond(200, { user: SAVED_USER });
-      SignUpRequestApi.signUp({ newUser: NEW_USER });
+      authRequestApi.signUp({ newUser: NEW_USER });
       $httpBackend.flush();
 
       expect(credentialsSubmissionCBs.successCB).toHaveBeenCalled();
@@ -54,7 +54,7 @@ describe("SignUpRequestApi", () => {
       spyOn(credentialsSubmissionCBs, "failureCB");
 
       $httpBackend.expectPOST('/api/createAccount').respond(409);
-      SignUpRequestApi.signUp({ newUser: NEW_USER });
+      authRequestApi.signUp({ newUser: NEW_USER });
       $httpBackend.flush();
 
       expect(credentialsSubmissionCBs.failureCB).toHaveBeenCalled();
