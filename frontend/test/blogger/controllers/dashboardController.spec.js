@@ -11,6 +11,14 @@ describe("dashboard controller", () => {
 
   beforeEach(module(bloggerModule));
 
+  beforeEach(() => {
+    module(($provide) => {
+      $provide.service('authenticationStore', function() {
+        this.getCurrentUser = jasmine.createSpy().and.callFake(() => { return {username: 'test'} });
+      });
+    });
+  });
+
   beforeEach(inject(($controller) => {
     vm = $controller('dashboardController', {});
   }));

@@ -6,7 +6,7 @@ export default function BlogRequestApi($http, blogRequestCBs) {
       $http({
         url: "/api/userBlogs",
         method: "GET",
-        data: data,
+        params: data,
       }).then(
         blogRequestCBs.getUserBlogsSuccessCB,
         blogRequestCBs.getUserBlogsFailureCB

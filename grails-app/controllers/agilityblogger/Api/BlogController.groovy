@@ -14,9 +14,10 @@ class BlogController {
     def responseBody
     def authorBlogs = blogService.blogsForAuthor(params.authorName)
 
-    if(authorBlogs) {
+    if(authorBlogs != null) {
       responseBody = formatter.formatBlogs(authorBlogs)
     } else {
+      response.status = 409
       def errors = blogService.blogsForAuthorErrors(params.authorName)
       responseBody = formatter.formatErrors(errors)
     }

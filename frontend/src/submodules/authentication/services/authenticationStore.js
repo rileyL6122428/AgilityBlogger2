@@ -1,10 +1,12 @@
+import User from '../classes/User.js';
+
 function AuthenticationStore() {
   var currentUser = null;
 
   return({
     getCurrentUser: () => { return currentUser; },
 
-    setCurrentUser: (user) => { currentUser = user; },
+    setCurrentUser: (userData) => { currentUser = new User(userData); },
 
     userIsLoggedIn: () => { return currentUser !== null; },
 
