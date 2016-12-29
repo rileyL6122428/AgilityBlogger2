@@ -1,10 +1,10 @@
 ###PRIORITY
 
-0. write login
-   add author class for authorStore
-1. Begin blogger module with dashboard component
-2. write interface for and test auth service
-3. write interface for and test formatter
+1. write interface for and test auth service
+2. write interface for and test formatter
+3. add author class for authorStore
+4. add unit tests for remaining frontend components
+5. Begin blogger module with dashboard component
 
 ###BACKBURNER
 

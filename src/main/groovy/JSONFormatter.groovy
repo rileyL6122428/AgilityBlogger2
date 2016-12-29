@@ -1,21 +1,10 @@
 package agilityblogger
 
-class JSONFormatter {
-  def formatBlogs(blogs) {
-    return [blogs: blogs]
-  }
+interface JSONFormatter {
 
-  def formatErrors(errors) {
-    return [errors: [list: errors]]
-  }
+  Map formatBlogs(blogs)
+  Map formatErrors(errors)
+  Map formatUser(user)
+  Map formatNotification(notification)
 
-  def formatUser(user) {
-    return ([
-      user: [username: user.username, id: user.id]
-    ]);
-  }
-
-  def formatNotification(notification) {
-    return [notification: notification]
-  }
 }

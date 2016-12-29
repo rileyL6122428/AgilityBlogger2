@@ -7,8 +7,8 @@ class AuthenticationController {
 
   static responseFormats = ['json', 'xml']
 
-  AuthenticationService authService = new AuthenticationService()
-  JSONFormatter formatter = new JSONFormatter()
+  AuthenticationService authService = new AuthenticationServiceImpl()
+  JSONFormatter formatter = new JSONFormatterImpl()
 
   def createAccount() {
     def responseBody

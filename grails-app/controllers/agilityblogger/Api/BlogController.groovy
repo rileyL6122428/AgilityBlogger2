@@ -7,8 +7,8 @@ class BlogController {
 
   static responseFormats = ['json', 'xml']
 
-  BlogService blogService = new BlogService()
-  JSONFormatter formatter = new JSONFormatter()
+  BlogService blogService = new BlogServiceImpl()
+  JSONFormatter formatter = new JSONFormatterImpl()
 
   def getUserBlogs() {
     def responseBody
