@@ -7,10 +7,9 @@ const {inject, module} = angular.mock;
 describe("CredentialsSubmisionCBs", () => {
   let credentialsSubmissionCBs, authenticationStore, $state;
 
+  const SAMPLE_USER = { username: "username", id: "1" };
   const SUCCESS_RESPONSE = {
-    data: {
-      user: { username: "username", id: "1" }
-    }
+    data: { user: SAMPLE_USER }
   }
 
   beforeEach(module(authenticationModule));
@@ -32,7 +31,10 @@ describe("CredentialsSubmisionCBs", () => {
   describe("#successCB", () => {
     it("should store a user in the authenticationStore", () => {
       credentialsSubmissionCBs.successCB(SUCCESS_RESPONSE);
-      expect(authenticationStore.getCurrentUser()).toEqual(SUCCESS_RESPONSE.data.user);
+      let storedUser = authenticationStore.getCurrentUser();
+
+      expect(storedUser.getUsername()).toEqual(SAMPLE_USER.username);
+      expect(storedUser.getId()).toEqual(SAMPLE_USER.id);
     });
 
     it("should send the user to the dashboard", () => {

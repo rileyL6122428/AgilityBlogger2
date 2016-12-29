@@ -2,6 +2,7 @@ import angular from 'angular';
 import 'angular-mocks';
 import bloggerModule from '../../../src/submodules/blogger/bloggerModule.js';
 import FilterableBlogList from '../../../src/submodules/blogger/classes/blog/FilterableBlogList.js';
+import User from '../../../src/submodules/authentication/classes/User.js'
 
 const {inject, module} = angular.mock;
 
@@ -14,7 +15,9 @@ describe("dashboard controller", () => {
   beforeEach(() => {
     module(($provide) => {
       $provide.service('authenticationStore', function() {
-        this.getCurrentUser = jasmine.createSpy().and.callFake(() => { return {username: 'test'} });
+        this.getCurrentUser = jasmine.createSpy().and.callFake(() => {
+          return new User({ id: 1, username: 'test' })
+        });
       });
     });
   });

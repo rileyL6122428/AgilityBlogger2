@@ -4,10 +4,11 @@ function DashboardController (blogRequestApi, authenticationStore) {
 
   let vm = this;
 
+  vm.currentUser = authenticationStore.getCurrentUser();
   vm.userBlogs = new FilterableBlogList();
 
   blogRequestApi.getUserBlogs({
-    authorName: authenticationStore.getCurrentUser().username // getCurrentUser
+    authorName: vm.currentUser.getUsername()
   });
 }
 
