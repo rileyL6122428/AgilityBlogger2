@@ -12,3 +12,5 @@ describe("Blog", () => {
     expect(blog.getName()).toEqual(blogData.name);
   });
 });
+
+//NOTE RAW BLOG FORMAT => {"id":1,"author":{"id":1},"name":"blog1","posts":[]}

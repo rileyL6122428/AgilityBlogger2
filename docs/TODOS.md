@@ -1,11 +1,11 @@
 ###PRIORITY
 
 1. Begin blogger module with dashboard component
+2. write interface for and test auth service
+3. write interface for and test formatter
 
 ###BACKBURNER
 
-1. test auth service
-2. mock auth service in auth controller tests
 3. add unit tests for
   - directives:
     * signUpFormFields

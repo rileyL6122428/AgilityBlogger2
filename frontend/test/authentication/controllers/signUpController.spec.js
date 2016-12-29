@@ -13,11 +13,9 @@ describe("SignUpController", () => {
 
   beforeEach(module(agilityBloggerApp));
 
-  beforeEach(inject((_$httpBackend_, $controller, _$state_, _SignUpRequestApi_) => {
+  beforeEach(inject(($controller, _SignUpRequestApi_) => {
     vm = $controller('signUpController', {});
-    $state = _$state_;
     SignUpRequestApi = _SignUpRequestApi_;
-    $httpBackend = _$httpBackend_;
   }));
 
   it('should be registered', () => expect(vm).toBeDefined());

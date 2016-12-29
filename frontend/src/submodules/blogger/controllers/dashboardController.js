@@ -1,9 +1,10 @@
+import FilterableBlogList from '../classes/blog/FilterableBlogList.js'
 function DashboardController () {
   'ngInject';
 
   let vm = this;
 
-  vm.testMessage = "Hello to the world";
+  vm.userBlogs = new FilterableBlogList();
 }
 
 export default DashboardController;
