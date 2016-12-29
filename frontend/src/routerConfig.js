@@ -1,4 +1,5 @@
 import signUpTemplate from './submodules/authentication/templates/sign-up.html';
+import loginTemplate from './submodules/authentication/templates/login.html';
 import dashboardTemplate from './submodules/blogger/templates/dashboard.html'
 
 function routesConfig($stateProvider, $urlRouterProvider) {
@@ -15,6 +16,12 @@ function routesConfig($stateProvider, $urlRouterProvider) {
         url: "/sign-up",
         template: signUpTemplate,
         controller: "signUpController as vm",
+    })
+
+    .state('Login', {
+      url: "/login",
+      template: loginTemplate,
+      controller: "loginController as vm",
     })
 
     .state('dashboard', {

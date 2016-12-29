@@ -11,6 +11,7 @@ class FormAuthor {
 
   writeFieldWithCheck(formField) {
     this.writeField(formField);
+    let test = formField;
     this.writeField(new MatchingFormField({
       name: formField.name + "Confirm",
       dependantField: formField

@@ -1,23 +1,23 @@
-div.sign-in-container h2 {
+div.auth-container h2 {
   margin-top: 40px;
   font-size: 28px;
 }
 
-form.sign-in-form label {
+form.auth-form label {
   float: left;
   padding-top: 3px;
   font-size: 26px;
 }
 
-form.sign-in-form > div.form-group:first-child, form.sign-in-form > div.form-group:last-child {
+form.auth-form > div.form-group:first-child, form.auth-form > div.form-group:last-child {
   margin-top: 20px;
 }
 
-form.sign-in-form div.input-container {
+form.auth-form div.input-container {
   position: relative;
 }
 
-form.sign-in-form div.input-container > label {
+form.auth-form div.input-container > label {
   position: absolute;
   left: -20px;
   top: 3px;

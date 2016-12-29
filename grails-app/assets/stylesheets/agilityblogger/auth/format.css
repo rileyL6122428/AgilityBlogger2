@@ -1,15 +1,15 @@
-div.sign-in-container {
+div.auth-container {
   display: block;
   margin: auto;
   margin-top: 50px;
   width: 550px;
 }
 
-div.sign-in-container h2 {
+div.auth-container h2 {
   text-align: center;
 }
 
-div.sign-in-container {
+div.auth-container {
   border: 1px solid black;
   border-radius: 5px;
 }
@@ -18,46 +18,46 @@ div.form-group {
   margin-bottom: 7px;
 }
 
-div.sign-in-errors {
+div.auth-errors {
   height: 22px;
   width: 100%;
   text-align: center;
 }
 
-div.sign-in-errors[status], div.sign-in-errors[status="validations-passed"] {
+div.auth-errors[status], div.auth-errors[status="validations-passed"] {
   visibility: hidden;
 }
 
-div.sign-in-errors[status="errors-present"] {
+div.auth-errors[status="errors-present"] {
   visibility: visible;
   color:rgba(255, 0, 0, 0.4);
 }
 
-div.sign-in-errors[status="errors-present"] + div > input {
+div.auth-errors[status="errors-present"] + div > input {
   border-color: rgba(255, 0, 0, 0.4);
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(255, 0, 0, 0.4);
 }
 
-div.sign-in-errors[status="errors-present"] + div > label {
+div.auth-errors[status="errors-present"] + div > label {
   color: rgba(255, 0, 0, 0.4);
   text-shadow: 0 0 2px rgba(255, 0, 0, 0.4);
 }
 
-div.sign-in-errors[status="validations-passed"] {
+div.auth-errors[status="validations-passed"] {
   visibility: visible;
   color: rgba(82, 177, 147, .4);
 }
 
-div.sign-in-errors[status="validations-passed"] + div > input {
+div.auth-errors[status="validations-passed"] + div > input {
   border-color: rgba(82, 177, 147, .4);
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82, 177, 147, .4);
 }
 
-div.sign-in-errors[status="validations-passed"] + div > label {
+div.auth-errors[status="validations-passed"] + div > label {
   color: rgba(82, 177, 147 ,.4);
   text-shadow: 0 0 2px rgba(82, 177, 147 ,.4);
 }
 
-form.sign-in-form > div.form-group:last-child {
+form.auth-form > div.form-group:last-child {
   margin-bottom: 35px;
 }

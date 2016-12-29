@@ -11,6 +11,7 @@ class Form {
   }
 
   addFieldWithCheck(formField) {
+    let test = formField
     this.author.writeFieldWithCheck(formField);
   }
 

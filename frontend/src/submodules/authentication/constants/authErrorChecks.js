@@ -1,6 +1,6 @@
 import ErrorCheck from '../classes/errorCheck.js';
 
-let signUpErrorChecks = {
+let authErrorChecks = {
   tooShort: new ErrorCheck(
     (value) => { return value.length < 5; },
     "Too short (at least 5 characters long)"
@@ -22,4 +22,4 @@ let signUpErrorChecks = {
   )
 }
 
-export default signUpErrorChecks;
+export default authErrorChecks;

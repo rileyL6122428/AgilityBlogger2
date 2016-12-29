@@ -1,7 +1,6 @@
 ###PRIORITY
 
-0. add User class for authenticationStore
-   write login
+0. write login
    add author class for authorStore
 1. Begin blogger module with dashboard component
 2. write interface for and test auth service
