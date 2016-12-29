@@ -52,7 +52,7 @@ class BlogControllerSpec extends Specification {
       when:
         controller.getUserBlogs()
       then:
-        1 * blogServiceMock.blogsForAuthor('user') >> false
+        1 * blogServiceMock.blogsForAuthor('user') >> null
         1 * blogServiceMock.blogsForAuthorErrors('user') >> errors
         1 * formatterMock.formatErrors(errors) >> formattedErrorList
         0 * _._
