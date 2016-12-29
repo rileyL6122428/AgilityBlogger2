@@ -4,15 +4,24 @@ import spock.lang.Ignore;
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 import grails.test.mixin.Mock
+import grails.converters.JSON
 
 @TestFor(AuthenticationController)
 @Mock(User)
 class AuthControllerSpec extends Specification {
 
+    def user, userFormatted;
+    def errors, formattedErrors;
+
     AuthenticationService authServiceMock;
     JSONFormatter formatterMock;
 
     def setup() {
+      user = new User(username: "USERNAME", password: "PASSWORD").save(flush: true)
+      userFormatted = [user: [username: user.username, id: user.id]]
+      errors = ["SAMPLE ERROR MSG"]
+      formattedErrors = [errors: [list: errors]]
+
       authServiceMock = Mock(AuthenticationService)
       formatterMock = Mock(JSONFormatter)
 
@@ -20,139 +29,107 @@ class AuthControllerSpec extends Specification {
       controller.formatter = formatterMock
     }
 
-    def cleanup() {}
+    def cleanup() {
+      User.deleteAll()
+    }
 
-    void "#createAccount sends an error message when password field is empty"() {
+    void "#createAccount sends an error message when unable to create a user"() {
       given:
-        def errors = ["errors for create account when password is missing"]
-        def formattetErrors = [errors: [list: errors]]
+        request.method = 'POST'
         request.json = '{"username": "username", "password": ""}'
       when:
         controller.createAccount()
       then:
-        1 * authServiceMock.createUser(request.json) >> null
-        1 * authServiceMock.createUserErrorMsgs(request.json) >> errors
+        1 * authServiceMock.createUser(request.JSON) >> null
+        1 * authServiceMock.createUserErrorMsgs(request.JSON) >> errors
         1 * formatterMock.formatErrors(errors) >> formattedErrors
         0 * _._
         controller.response.status == 409
-
+        controller.response.json == formattedErrors
     }
 
-    @Ignore
-    void "#createAccount sends an error message when username field is empty"() {
-      given:
-        request.json = '{"username": "", "password": "password"}'
-      when:
-        controller.createAccount()
-      then:
-        controller.response.status == 409
-        view == '/api/errors'
-        model.errors.size() == 1
-        model.errors[0] == "Username field is empty"
-    }
-
-    @Ignore
-    void "#createAccount sends an error message when the username is already taken"() {
-      given:
-        new User(username: "username", password: "password").save(flush: true)
-        request.json = '{"username": "username", "password": "password"}'
-      when:
-        controller.createAccount()
-      then:
-        controller.response.status == 409
-        view == '/api/errors'
-        model.errors.size() == 1
-        model.errors[0] == "Username is already taken"
-    }
-
-    @Ignore
-    void "#createAccount sends, sets the session for, and persists a user when proper params are submitted"() {
+    void "#createAccount sends and sets the session for a user when a new user is created"() {
       given:
         request.method = 'POST'
         request.json = '{"username": "username", "password": "password"}'
       when:
         controller.createAccount()
       then:
+        1 * authServiceMock.createUser(request.JSON) >> user
+        1 * formatterMock.formatUser(user) >> userFormatted
+        0 * _._
         controller.response.status == 201
-        view == '/api/authentication/user'
-        model.user.username == "username"
-
-        session.user.username == 'username'
-
-        def allPersistedUsers = User.list()
-        allPersistedUsers.size() == 1
-        allPersistedUsers[0].username == "username"
-        allPersistedUsers[0].password == "password"
+        session.user.username == user.username
+        controller.response.json == userFormatted
     }
 
-    @Ignore
     void "#logIn returns an error message when user cannot be found with given params"() {
       given:
-        new User(username: "username", password: "password").save(flush: true)
+        request.method = 'POST'
         request.json = '{"username": "userna", "password": "passwo"}'
       when:
         controller.logIn()
       then:
+        1 * authServiceMock.findUser(request.JSON) >> null
+        1 * authServiceMock.findUserErrorMsgs() >> errors
+        1 * formatterMock.formatErrors(errors) >> formattedErrors
+        0 * _._
         controller.response.status == 409
-        view == '/api/errors'
-        model.errors.size() == 1
-        model.errors[0] == "user cannot be found with given params"
+        controller.response.json == formattedErrors
     }
 
-    @Ignore
-    void "#logIn sets the session for, and returns user when proper params are submitted"() {
+    void "#logIn sets the session for, and returns a user when proper params are submitted"() {
       given:
-        new User(username: "username", password: "password").save(flush: true)
+        request.method = 'POST'
         request.json = '{"username": "username", "password": "password"}'
       when:
         controller.logIn()
       then:
-        session.user.username == 'username'
+        1 * authServiceMock.findUser(request.JSON) >> user
+        1 * formatterMock.formatUser(user) >> userFormatted
+        0 * _._
+        session.user.username == user.username
         controller.response.status == 200
-
-        def allPersistedUsers = User.list()
-        allPersistedUsers.size() == 1
-        allPersistedUsers[0].username == "username"
-        allPersistedUsers[0].password == "password"
-
-        view == '/api/authentication/user'
-        model.user.username == "username"
+        controller.response.json == userFormatted
     }
 
-    @Ignore
     void "#signOut nulls the session and returns a success message"() {
       given:
-        session.user = [username: "username"]
+        def notificationMsg = "Sign out successful"
+        def formattedNotification = [notification: notificationMsg]
+        session.user = [username: user.username]
       when:
         controller.signOut()
       then:
+        1 * formatterMock.formatNotification(notificationMsg) >> formattedNotification
+        0 * _._
         session.user == null
         controller.response.status == 200
-        view == '/api/authentication/signOut'
+        controller.response.json == formattedNotification
     }
 
-    @Ignore
     void "#sessionUser returns a user when a session user is set"() {
       given:
-        new User(username: "username", password: "password").save(flush: true)
-        session.user = [username: "username"]
+        session.user = [username: user.username]
       when:
         controller.sessionUser()
       then:
+        1 * authServiceMock.findSessionUser(controller.session) >> user
+        1 * formatterMock.formatUser(user) >> userFormatted
+        0 * _._
         controller.response.status == 200
-        view == '/api/authentication/user'
-        model.user.username == "username"
+        controller.response.json == userFormatted
     }
 
-    @Ignore
     void "#sessionUser returns an error message when a session user is not set"() {
       when:
         controller.sessionUser()
       then:
+        1 * authServiceMock.findSessionUserErrorMsgs() >> errors
+        1 * formatterMock.formatErrors(errors) >> formattedErrors
+        0 * _._
         controller.response.status == 401
-        view == '/api/errors'
-        model.errors.size() == 1
-        model.errors[0] == "User not signed in"
+        controller.response.json == formattedErrors
     }
 
 }
