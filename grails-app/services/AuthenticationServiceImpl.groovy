@@ -21,15 +21,15 @@ class AuthenticationServiceImpl implements AuthenticationService {
       errorMessageList.push("Username is already taken")
     }
 
-    return errorMessageList
+    errorMessageList
   }
 
   User findUser(userParams) {
-    return User.findByUsernameAndPassword(userParams.username, userParams.password)
+    User.findByUsernameAndPassword(userParams.username, userParams.password)
   }
 
   List findUserErrorMsgs() {
-    return ["user cannot be found with given params"]
+    ["user cannot be found with given params"]
   }
 
   User findSessionUser(session) {
@@ -37,6 +37,6 @@ class AuthenticationServiceImpl implements AuthenticationService {
   }
 
   List findSessionUserErrorMsgs() {
-    return ["User not signed in"];
+    ["User is not signed in"];
   }
 }

@@ -76,4 +76,31 @@ class AuthenticationServiceImplSpec extends Specification {
         returnedUser == null
     }
 
+    void "#createUserErrorMsgs returns the appropriate list of errors for user params that fails validations"() {
+      given:
+        def faultyUserParams = [username: "", password: ""]
+      when:
+        def returnedErrorMsgs = authService.createUserErrorMsgs(faultyUserParams)
+      then:
+        returnedErrorMsgs.size() == 2
+        returnedErrorMsgs.contains("Password field is empty") == true
+        returnedErrorMsgs.contains("Username field is empty") == true
+    }
+
+    void "#findUserErrorMsgs returns the appropriate list of errors"() {
+      when:
+        def returnedErrorsMsgs = authService.findUserErrorMsgs()
+      then:
+        returnedErrorsMsgs.size() == 1
+        returnedErrorsMsgs.contains("user cannot be found with given params") == true
+    }
+
+    void "#findSessionUserErrorMsgs returns the appropriate list of errors"() {
+      when:
+        def returnedErrorsMsgs = authService.findSessionUserErrorMsgs()
+      then:
+        returnedErrorsMsgs.size() == 1
+        returnedErrorsMsgs.contains("User is not signed in") == true
+    }
+
 }
