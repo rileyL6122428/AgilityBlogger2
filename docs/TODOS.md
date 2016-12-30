@@ -1,6 +1,5 @@
 ###PRIORITY
 
-1. Begin dashboard view with static data
 2. add redux
 3. store raw data, fetch data as class instances
 4. add unit tests for remaining frontend components (especially directives)
