@@ -12,6 +12,7 @@
 *= require main
 *= require mobile
 *= require_self
-*= require_tree agilityblogger
+*= require_tree constants
 *= require_tree bootstrap
+*= require_tree agilityblogger
 */

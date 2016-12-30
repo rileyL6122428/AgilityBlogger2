@@ -1,0 +1,16 @@
+section.dashboard > div.section-header > h2 {
+  font-size: 32px;
+  text-align: center;
+}
+
+section.dashboard > div.new-blog > button {
+  display: block;
+  height: 40px;
+  width: 40px;
+
+  margin: auto;
+  padding: 0 0 0 1.5px;
+  border-radius: 20px;
+
+  color: rgba(0, 0, 0, 0.7);
+}

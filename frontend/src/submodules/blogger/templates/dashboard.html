@@ -1,4 +1,42 @@
-<div>
-  <div>message should be below</div><br/>
-  <div>{{vm.testMessage}}</div>
+<div class="container-fluid">
+  <section class="navbar row">
+    <div class="site-title col-sm-3">
+      <h2>Site Title</h3>
+    </div>
+
+    <ul class="options col-sm-9">
+      <li><a>Log out</a></li>
+      <li><a>Search</a></li>
+    </ul>
+  </section>
+
+  <section class="dashboard">
+    <div class="section-header row">
+      <h2>Username's Blogs</h2>
+    </div>
+
+    <div class="new-blog row">
+      <button class="glyphicon glyphicon-plus btn btn-default"></button>
+    </div>
+
+    <div class="user-blogs">
+      <div class="filter-blogs row">
+        <input class="col-sm-offset-1 col-sm-10" type="text" placeholder="search blogs"/>
+      </div>
+
+      <div class="blog-list row">
+        <ul class="col-sm-offset-1 col-sm-10">
+          <li>Blog 1</li>
+          <li>Blog 2</li>
+          <li>Blog 3</li>
+          <li>Blog 4</li>
+          <li>Blog 5</li>
+          <li>Blog 6</li>
+          <li>Blog 7</li>
+          <li>Blog 8</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
 </div>
