@@ -19,7 +19,9 @@ class JSONFormatterImplSpec extends Specification {
       user = new User(username: "username", password: "password")
       blog1 = new Blog(name: "blog1")
       blog2 = new Blog(name: "blog2")
-      user.addToBlogs([blog1, blog2])
+
+      user.addToBlogs(blog1)
+      user.addToBlogs(blog2)
       user.save(flush: true)
     }
 

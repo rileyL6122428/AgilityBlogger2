@@ -2,7 +2,6 @@ package agilityblogger
 
 import org.springframework.stereotype.Service
 
-
 class BlogServiceImpl implements BlogService {
 
   List blogsForAuthor(authorName) {
