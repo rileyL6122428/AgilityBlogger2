@@ -22,7 +22,7 @@ class BlogControllerSpec extends Specification {
       formatterMock = Mock(JSONFormatter)
 
       controller.blogService = blogServiceMock
-      controller.formatter = formatterMock
+      controller.respFormatter = formatterMock
     }
 
     def cleanup() {}

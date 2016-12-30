@@ -26,7 +26,7 @@ class AuthControllerSpec extends Specification {
       formatterMock = Mock(JSONFormatter)
 
       controller.authService = authServiceMock
-      controller.formatter = formatterMock
+      controller.respFormatter = formatterMock
     }
 
     def cleanup() {
