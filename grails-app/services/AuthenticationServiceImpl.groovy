@@ -33,7 +33,7 @@ class AuthenticationServiceImpl implements AuthenticationService {
   }
 
   User findSessionUser(session) {
-    return User.findByUsername(session.user.username)
+    (session.user) ? User.findByUsername(session.user.username) : null
   }
 
   List findSessionUserErrorMsgs() {
