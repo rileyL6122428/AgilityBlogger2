@@ -1,5 +1,8 @@
 package agilityblogger
 
+import org.springframework.stereotype.Service
+
+
 class BlogServiceImpl implements BlogService {
 
   List blogsForAuthor(authorName) {
@@ -13,5 +16,5 @@ class BlogServiceImpl implements BlogService {
   List blogsForAuthorErrors(authorName) {
     return ["Unable to find author with name " + authorName]
   }
-  
+
 }

@@ -1,3 +1,5 @@
-// Place your Spring DSL code here
 beans = {
+  authService(agilityblogger.AuthenticationServiceImpl)
+  blogService(agilityblogger.BlogServiceImpl)
+  respFormatter(agilityblogger.JSONFormatterImpl)
 }

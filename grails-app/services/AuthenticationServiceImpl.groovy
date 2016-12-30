@@ -2,6 +2,7 @@ package agilityblogger
 
 import org.grails.web.json.JSONObject
 
+
 class AuthenticationServiceImpl implements AuthenticationService {
   User createUser(params) {
     new User(params).save(flush: true)

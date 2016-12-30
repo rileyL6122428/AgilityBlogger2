@@ -7,8 +7,8 @@ class AuthenticationController {
 
   static responseFormats = ['json', 'xml']
 
-  AuthenticationService authService = new AuthenticationServiceImpl()
-  JSONFormatter formatter = new JSONFormatterImpl()
+  AuthenticationService authService
+  JSONFormatter respFormatter
 
   def createAccount() {
     def responseBody
@@ -17,10 +17,10 @@ class AuthenticationController {
     if(user){
       response.status = 201
       session.user = [username: user.username]
-      responseBody = formatter.formatUser(user)
+      responseBody = respFormatter.formatUser(user)
     } else {
       response.status = 409;
-      responseBody = formatter.formatErrors(authService.createUserErrorMsgs(request.JSON))
+      responseBody = respFormatter.formatErrors(authService.createUserErrorMsgs(request.JSON))
     }
 
     render responseBody as JSON
@@ -32,10 +32,10 @@ class AuthenticationController {
 
     if(user) {
       session["user"] = [username: user.username]
-      responseBody = formatter.formatUser(user)
+      responseBody = respFormatter.formatUser(user)
     } else {
       response.status = 409
-      responseBody = formatter.formatErrors(authService.findUserErrorMsgs())
+      responseBody = respFormatter.formatErrors(authService.findUserErrorMsgs())
     }
 
     render responseBody as JSON
@@ -45,7 +45,7 @@ class AuthenticationController {
     def responseBody
 
     session["user"] = null
-    responseBody = formatter.formatNotification("Sign out successful")
+    responseBody = respFormatter.formatNotification("Sign out successful")
 
     render responseBody as JSON
   }
@@ -55,10 +55,10 @@ class AuthenticationController {
 
     if(session.user) {
       def user = authService.findSessionUser(session)
-      responseBody = formatter.formatUser(user)
+      responseBody = respFormatter.formatUser(user)
     } else {
       response.status = 401
-      responseBody = formatter.formatErrors(authService.findSessionUserErrorMsgs())
+      responseBody = respFormatter.formatErrors(authService.findSessionUserErrorMsgs())
     }
 
     render responseBody as JSON

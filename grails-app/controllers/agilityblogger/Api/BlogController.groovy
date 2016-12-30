@@ -7,19 +7,19 @@ class BlogController {
 
   static responseFormats = ['json', 'xml']
 
-  BlogService blogService = new BlogServiceImpl()
-  JSONFormatter formatter = new JSONFormatterImpl()
+  BlogService blogService
+  JSONFormatter respFormatter
 
   def getUserBlogs() {
     def responseBody
     def authorBlogs = blogService.blogsForAuthor(params.authorName)
 
     if(authorBlogs != null) {
-      responseBody = formatter.formatBlogs(authorBlogs)
+      responseBody = respFormatter.formatBlogs(authorBlogs)
     } else {
       response.status = 409
       def errors = blogService.blogsForAuthorErrors(params.authorName)
-      responseBody = formatter.formatErrors(errors)
+      responseBody = respFormatter.formatErrors(errors)
     }
 
     render responseBody as JSON
