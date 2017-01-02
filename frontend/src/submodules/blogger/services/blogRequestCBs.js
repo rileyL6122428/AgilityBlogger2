@@ -1,7 +1,15 @@
-export default function BlogRequestCBs(blogStore) {
+import { addBlogs } from '../../../redux/actions/blog.actions.js';
+export default function BlogRequestCBs($ngRedux, blogStore) {
   return ({
     getUserBlogsSuccessCB: (response) => {
-      blogStore.storeBlogs(response.data.blogs);
+      // blogStore.depositBlogs(response.data.blogs);
+
+      debugger
+      var action = addBlogs(response.data.blogs)
+      $ngRedux.dispatch(action);
+
+      debugger
+      console.log("Attempted dispatch");
     },
 
     getUserBlogsFailureCB: (response) => {

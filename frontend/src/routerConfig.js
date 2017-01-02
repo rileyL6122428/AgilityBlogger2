@@ -1,8 +1,10 @@
 import signUpTemplate from './submodules/authentication/templates/sign-up.html';
 import loginTemplate from './submodules/authentication/templates/login.html';
-import dashboardTemplate from './submodules/blogger/templates/dashboard.html'
+import dashboardTemplate from './submodules/blogger/templates/dashboard.html';
 
-function routesConfig($stateProvider, $urlRouterProvider) {
+import { RootReducer } from './redux/reducers/rootReducer.js';
+
+function routesConfig($stateProvider, $urlRouterProvider, $ngReduxProvider) {
   'ngInject';
 
   $urlRouterProvider.otherwise('/sign-up');
@@ -29,6 +31,8 @@ function routesConfig($stateProvider, $urlRouterProvider) {
         template: dashboardTemplate,
         controller: "dashboardController as vm"
     });
+
+    $ngReduxProvider.createStoreWith(RootReducer);
 }
 
 export default routesConfig;

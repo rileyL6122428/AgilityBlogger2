@@ -10,6 +10,8 @@
     "jquery": "^2.1.4",
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
+    "ng-redux": "^3.4.0-beta.1",
+    "redux": "^3.6.0",
     "uniq": "^1.0.1"
   },
   "devDependencies": {
