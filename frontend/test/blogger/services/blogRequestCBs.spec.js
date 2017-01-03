@@ -7,21 +7,19 @@ const {inject, module} = angular.mock;
 
 describe("blogRequestCBs", () => {
 
-  let blogRequestCBs, blogStoreMock;
+  let blogRequestCBs, $ngRedux;
 
   beforeEach(module(bloggerModule));
 
   beforeEach(() => {
     module(($provide) => {
-      $provide.service('blogStore', function() {
-        this.storeBlogs = jasmine.createSpy('storeBlogs');
-      });
+      $provide.value('$ngRedux', { dispatch: (action) => {} });
     });
   });
 
-  beforeEach(inject((_blogRequestCBs_, _blogStore_) => {
+  beforeEach(inject((_blogRequestCBs_, _$ngRedux_) => {
     blogRequestCBs = _blogRequestCBs_;
-    blogStoreMock = _blogStore_;
+    $ngRedux = _$ngRedux_;
   }));
 
   it("should be registered in the module", () => {
@@ -29,12 +27,16 @@ describe("blogRequestCBs", () => {
   });
 
   describe("#getUserBlogsSuccessCB", () => {
-    it("should call blogStore#storeBlogs", () => {
+    it("should store blogs", () => {
+      spyOn($ngRedux, "dispatch");
       let sampleBlog = SampleBlogData({ id: 1, authorId: 1 });
       let sampleResponse = { data: { blogs: [sampleBlog] } };
-
       blogRequestCBs.getUserBlogsSuccessCB(sampleResponse);
-      expect(blogStoreMock.storeBlogs).toHaveBeenCalledWith(sampleResponse.data.blogs);
+      
+      expect($ngRedux.dispatch).toHaveBeenCalledWith({
+        type: "ADD_BLOGS",
+        payload: sampleResponse.data.blogs
+      });
     });
   });
 })

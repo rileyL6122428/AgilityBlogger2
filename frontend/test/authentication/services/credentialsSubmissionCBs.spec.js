@@ -5,7 +5,7 @@ import authenticationModule from '../../../src/submodules/authentication/authent
 const {inject, module} = angular.mock;
 
 describe("CredentialsSubmisionCBs", () => {
-  let credentialsSubmissionCBs, authenticationStore, $state;
+  let credentialsSubmissionCBs, $ngRedux, $state;
 
   const SAMPLE_USER = { username: "username", id: "1" };
   const SUCCESS_RESPONSE = {
@@ -18,23 +18,25 @@ describe("CredentialsSubmisionCBs", () => {
     $state = { go: (value) => {} };
 
     module(function ($provide) {
+      $provide.value('$ngRedux', { dispatch: (action) => {} });
       $provide.value('$state', $state);
     });
   });
 
-  beforeEach(inject((_credentialsSubmissionCBs_, _authenticationStore_, _$state_) => {
+  beforeEach(inject((_credentialsSubmissionCBs_, _$ngRedux_, _$state_) => {
     credentialsSubmissionCBs = _credentialsSubmissionCBs_;
-    authenticationStore = _authenticationStore_;
+    $ngRedux = _$ngRedux_;
     $state = _$state_;
   }));
 
   describe("#successCB", () => {
-    it("should store a user in the authenticationStore", () => {
+    it("should store a user", () => {
+      spyOn($ngRedux, "dispatch");
       credentialsSubmissionCBs.successCB(SUCCESS_RESPONSE);
-      let storedUser = authenticationStore.getCurrentUser();
-
-      expect(storedUser.getUsername()).toEqual(SAMPLE_USER.username);
-      expect(storedUser.getId()).toEqual(SAMPLE_USER.id);
+      expect($ngRedux.dispatch).toHaveBeenCalledWith({
+        type: "ADD_CURRENT_USER",
+        payload: SAMPLE_USER
+      });
     });
 
     it("should send the user to the dashboard", () => {

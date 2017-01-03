@@ -14,11 +14,7 @@ describe("dashboard controller", () => {
 
   beforeEach(() => {
     module(($provide) => {
-      $provide.service('authenticationStore', function() {
-        this.getCurrentUser = jasmine.createSpy().and.callFake(() => {
-          return new User({ id: 1, username: 'test' })
-        });
-      });
+      $provide.value('$ngRedux', { connect: () => { return null; }})
     });
   });
 
