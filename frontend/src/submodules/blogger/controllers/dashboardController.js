@@ -1,4 +1,3 @@
-import FilterableBlogList from '../classes/blog/FilterableBlogList.js'
 import BlogActions from '../../../redux/actions/blog.actions.js';
 
 function DashboardController ($ngRedux, $scope, blogRequestApi, dashboardControllerHelper) {

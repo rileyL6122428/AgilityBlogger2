@@ -1,8 +1,14 @@
+import FilterableList from '../classes/FilterableList.js';
+
 export default function DashboardControllerHelper() {
   return ({
     setState: (state) => {
       return ({
-        blogs: _blogsForCurrentUser(state),
+        blogList: new FilterableList({
+          items: _blogsForCurrentUser(state),
+          propertyFilters: ["name"]
+        }),
+
         currentUser: state.currentUser
       });
     }

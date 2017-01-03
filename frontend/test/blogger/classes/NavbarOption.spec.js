@@ -1,4 +1,4 @@
-import NavbarOption from '../../../../src/submodules/blogger/classes/navbar/NavbarOption.js';
+import NavbarOption from '../../../src/submodules/blogger/classes/NavbarOption.js';
 
 describe("NavbarOption", () => {
   it("should construct with text and an address", () => {

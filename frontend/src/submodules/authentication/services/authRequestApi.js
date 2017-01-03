@@ -1,7 +1,6 @@
 export default function AuthRequestApi($http, credentialsSubmissionCBs) {
   'ngInject';
 
-
   return ({
     signUp: (newUser) => {
       _credentialsSubmissionRequest({
@@ -17,7 +16,7 @@ export default function AuthRequestApi($http, credentialsSubmissionCBs) {
       });
     }
   });
-  
+
   function _credentialsSubmissionRequest(params) {
     $http({
       url: params.url,

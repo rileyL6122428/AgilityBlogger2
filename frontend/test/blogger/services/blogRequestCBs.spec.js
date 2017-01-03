@@ -1,7 +1,7 @@
 import angular from 'angular';
 import 'angular-mocks';
 import bloggerModule from '../../../src/submodules/blogger/bloggerModule.js';
-import SampleBlogData from '../utils/dataFactories/BlogDataFactory.js';
+import SampleBlogData from '../utils/BlogDataFactory.js';
 
 const {inject, module} = angular.mock;
 

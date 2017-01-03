@@ -1,5 +1,5 @@
-import NavbarOption from '../../../../src/submodules/blogger/classes/navbar/NavbarOption.js';
-import NavbarOptionList from '../../../../src/submodules/blogger/classes/navbar/NavbarOptionList.js';
+import NavbarOption from '../../../src/submodules/blogger/classes/NavbarOption.js';
+import NavbarOptionList from '../../../src/submodules/blogger/classes/NavbarOptionList.js';
 
 describe("NavbarOptionList", () => {
   let navbarOptionList, option1, option2;

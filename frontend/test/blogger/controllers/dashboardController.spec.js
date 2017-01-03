@@ -3,8 +3,6 @@ import 'angular-mocks';
 import ngRedux from 'ng-redux';
 
 import agilityBloggerApp from '../../../src/agilityBloggerApp.js';
-import FilterableBlogList from '../../../src/submodules/blogger/classes/blog/FilterableBlogList.js';
-import User from '../../../src/submodules/authentication/classes/User.js'
 
 const {inject, module} = angular.mock;
 

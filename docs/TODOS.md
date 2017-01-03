@@ -1,8 +1,8 @@
 ###PRIORITY
 
-2. add unit tests for remaining frontend components (especially directives)
 3. Hookup dashboard to backend
-4. setup hard refresh recovery for frontent
+2. add unit tests for remaining frontend components (especially directives)
+4. setup hard refresh recovery for frontend
 5. setup logout
 6. Refactor angular controllers into classes
 
