@@ -1,7 +1,6 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 
-import AuthenticationStore from './services/authenticationStore.js';
 import CredentialsSubmissionCBs from './services/credentialsSubmissionCBs.js';
 import AuthRequestApi from './services/authRequestApi.js';
 import FormFactory from './services/formFactory.js';
@@ -16,7 +15,6 @@ const authenticationModule = angular.module('authenticationModule', [uiRouter])
     .service('credentialsSubmissionCBs', CredentialsSubmissionCBs)
     .service('authRequestApi', AuthRequestApi)
     .service('formFactory', FormFactory)
-    .service('authenticationStore', AuthenticationStore)
 
     .directive('authFormFields', AuthFormFieldsDirective)
 

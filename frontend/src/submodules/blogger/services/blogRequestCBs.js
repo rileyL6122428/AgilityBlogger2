@@ -1,5 +1,5 @@
 import { addBlogs } from '../../../redux/actions/blog.actions.js';
-export default function BlogRequestCBs($ngRedux, blogStore) {
+export default function BlogRequestCBs($ngRedux) {
   return ({
     getUserBlogsSuccessCB: (response) => {
       $ngRedux.dispatch(addBlogs(response.data.blogs));

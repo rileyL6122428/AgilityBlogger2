@@ -4,5 +4,5 @@ import { BlogsReducer }  from './blogs.reducer.js';
 
 export const RootReducer = combineReducers({
     blogs: BlogsReducer,
-    currentUser: authReducer
+    currentUser: AuthReducer
 });

@@ -1,8 +1,10 @@
-function CredentialsSubmissionCBs (authenticationStore, $state) {
+import { addCurrentUser } from '../../../redux/actions/user.actions.js';
+
+function CredentialsSubmissionCBs ($ngRedux, $state) {
 
   return ({
     successCB: (response) => {
-      authenticationStore.setCurrentUser(response.data.user);
+      $ngRedux.dispatch(addCurrentUser(response.data.user));
       $state.go('dashboard');
     },
 
