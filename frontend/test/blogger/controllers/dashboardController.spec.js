@@ -1,6 +1,8 @@
 import angular from 'angular';
 import 'angular-mocks';
-import bloggerModule from '../../../src/submodules/blogger/bloggerModule.js';
+import ngRedux from 'ng-redux';
+
+import agilityBloggerApp from '../../../src/agilityBloggerApp.js';
 import FilterableBlogList from '../../../src/submodules/blogger/classes/blog/FilterableBlogList.js';
 import User from '../../../src/submodules/authentication/classes/User.js'
 
@@ -8,21 +10,22 @@ const {inject, module} = angular.mock;
 
 describe("dashboard controller", () => {
 
-  let vm;
+  let vm, controllerHelper;
 
-  beforeEach(module(bloggerModule));
+  const SAMPLE_USER = { username: "username", id: 1 };
+
+  beforeEach(module(agilityBloggerApp));
 
   beforeEach(() => {
     module(($provide) => {
-      $provide.value('$ngRedux', { connect: () => { return null; }})
+      $provide.value('$scope', { "$on": (lifecycleEvent, cb) => {} });
+      $provide.value('dashboardControllerHelper', {
+        setState: (state) => { return ({ currentUser: SAMPLE_USER }); }
+      });
     });
   });
 
-  beforeEach(inject(($controller) => {
-    vm = $controller('dashboardController', {});
-  }));
+  beforeEach(inject(($controller) => vm = $controller('dashboardController', {})));
 
-  it("should instantiate with a filterable blog list", () => {
-    expect(vm.userBlogs instanceof FilterableBlogList).toBe(true);
-  })
+  it("should be defined", () => expect(vm).toBeDefined());
 });

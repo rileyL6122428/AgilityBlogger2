@@ -14,10 +14,11 @@ describe("blogRequestCBs", () => {
   beforeEach(() => {
     module(($provide) => {
       $provide.value('$ngRedux', { dispatch: (action) => {} });
+      $provide.value('$scope', { "$on": (lifecycleEvent, cb) => {} });
     });
   });
 
-  beforeEach(inject((_blogRequestCBs_, _$ngRedux_) => {
+  beforeEach(inject((_blogRequestCBs_, _$ngRedux_, $scope) => {
     blogRequestCBs = _blogRequestCBs_;
     $ngRedux = _$ngRedux_;
   }));
@@ -32,7 +33,7 @@ describe("blogRequestCBs", () => {
       let sampleBlog = SampleBlogData({ id: 1, authorId: 1 });
       let sampleResponse = { data: { blogs: [sampleBlog] } };
       blogRequestCBs.getUserBlogsSuccessCB(sampleResponse);
-      
+
       expect($ngRedux.dispatch).toHaveBeenCalledWith({
         type: "ADD_BLOGS",
         payload: sampleResponse.data.blogs
