@@ -8,7 +8,6 @@ function DashboardController ($ngRedux, $scope, blogRequestApi, authenticationSt
   vm.currentUser = authenticationStore.getCurrentUser();
   vm.userBlogs = new FilterableBlogList();
   vm.subscriptionToken = $ngRedux.connect(grabRelevantState, BlogActions)(vm);
-  debugger
 
   blogRequestApi.getUserBlogs({
     authorName: vm.currentUser.username
@@ -19,11 +18,20 @@ function DashboardController ($ngRedux, $scope, blogRequestApi, authenticationSt
  });
 
  function grabRelevantState(state) {
-   debugger
-   console.log("H/W");
-
-   return state;
+   return ({ blogs: blogsForCurrentUser(state.blogs) }); // I BELEIVE THIS OBJ IS BOUND TO THE CONTROLLER
  }
+
+ function blogsForCurrentUser(blogs) {
+   let userBlogs = [];
+
+   for(var id in blogs) {
+     let blog = blogs[id];
+     if(blog.authorId === currentUser.id) userBlogs.push(blogs.id);
+   }
+
+   return userBlogs;
+ }
+
 }
 
 export default DashboardController;

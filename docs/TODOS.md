@@ -1,8 +1,11 @@
 ###PRIORITY
 
-2. add redux
-3. store raw data, fetch data as class instances
-4. add unit tests for remaining frontend components (especially directives)
+1. add redux (swap out blog store and auth store)
+2. add unit tests for remaining frontend components (especially directives)
+3. Hookup dashboard
+4. setup hard refresh recovery for frontent
+5. setup logout
+6. Refactor angular controllers into classes
 
 ###BACKBURNER
 

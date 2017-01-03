@@ -1,0 +1,3 @@
+export const AUTHENTICATION = {
+  ADD_CURRENT_USER: "ADD_CURRENT_USER"
+};
